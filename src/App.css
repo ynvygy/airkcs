@@ -36,3 +36,53 @@
     transform: rotate(360deg);
   }
 }
+
+/* Header container */
+.header {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Logo */
+.header .navbar-brand img {
+  height: 36px;
+}
+
+/* Search bar */
+.header .form-inline {
+  margin-left: 20px;
+}
+
+.header .input-group {
+  width: 400px;
+}
+
+.header .form-control {
+  border-radius: 30px;
+}
+
+.header .btn-primary {
+  border-radius: 30px;
+  background-color: #003580;
+  border-color: #003580;
+  font-weight: bold;
+}
+
+/* Navigation links */
+.header .navbar-nav .nav-item {
+  margin-right: 10px;
+}
+
+.header .nav-link {
+  color: #333;
+}
+
+.header .nav-link:hover {
+  color: #003580;
+}
+
+/* User profile icon */
+.header .nav-link svg {
+  font-size: 30px;
+  color: #333;
+}
