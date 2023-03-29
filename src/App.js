@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Search from './components/Search';
 import Tabs from './components/Tabs';
 import NewOwner from './components/NewOwner';
+import Listings from './components/Listings';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
         <Tabs />
         <Search />
         <Routes>
-          <Route path="/joins" element={<NewOwner />} />
+          <Route path="/joins" element={<NewOwner account={account}/>} />
+          <Route path="/listings" element={<Listings account={account}/>} />
         </Routes>
       </BrowserRouter>
     </div>
