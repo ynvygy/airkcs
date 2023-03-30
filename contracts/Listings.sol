@@ -15,7 +15,10 @@ contract Listings {
     mapping(uint => Listing) public listings;
 
     modifier onlyOwner(uint _listingId) {
-        require(msg.sender == listings[_listingId].owner);
+        require(
+            msg.sender == listings[_listingId].owner,
+            "you are not the owner"
+        );
         _;
     }
 
@@ -54,9 +57,11 @@ contract Listings {
         delete listings[_listingId];
     }
 
-    function getListing(uint _listingId) public returns (Listing memory) {
+    function getListing(uint _listingId) public view returns (Listing memory) {
         return listings[_listingId];
     }
 
-    function getOwner() public {}
+    function getOwner(uint _listingId) public view returns (address) {
+        return listings[_listingId].owner;
+    }
 }
