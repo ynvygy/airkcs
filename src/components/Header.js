@@ -2,10 +2,19 @@ import { ethers } from 'ethers';
 import { Link } from 'react-router-dom';
 
 const Header = ({ account, setAccount }) => {
-  const connectHandler = async () => {
-    const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
-    const account = ethers.utils.getAddress(accounts[0])
-    setAccount(account)
+  const connectHandler = async (event) => {
+    try {
+      event.preventDefault();
+      const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
+
+      // Get the first account from the array of accounts
+      const account = ethers.utils.getAddress(accounts[0])
+  
+      // Update the account state
+      setAccount(account)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

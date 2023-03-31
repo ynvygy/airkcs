@@ -9,15 +9,15 @@ contract Listings {
         uint price;
         string location;
         string description;
-        address owner;
+        address landlord;
     }
 
     mapping(uint => Listing) public listings;
 
-    modifier onlyOwner(uint _listingId) {
+    modifier onlyLandlord(uint _listingId) {
         require(
-            msg.sender == listings[_listingId].owner,
-            "you are not the owner"
+            msg.sender == listings[_listingId].landlord,
+            "you are not the landlord"
         );
         _;
     }
@@ -34,7 +34,7 @@ contract Listings {
         listings[listingId].price = price;
         listings[listingId].location = location;
         listings[listingId].description = description;
-        listings[listingId].owner = msg.sender;
+        listings[listingId].landlord = msg.sender;
 
         nextListingId++;
     }
@@ -45,15 +45,15 @@ contract Listings {
         uint _price,
         string memory _location,
         string memory _description
-    ) external onlyOwner(_listingId) {
+    ) external onlyLandlord(_listingId) {
         listings[_listingId].image = _image;
         listings[_listingId].price = _price;
         listings[_listingId].location = _location;
         listings[_listingId].description = _description;
-        listings[_listingId].owner = msg.sender;
+        listings[_listingId].landlord = msg.sender;
     }
 
-    function removeListing(uint _listingId) external onlyOwner(_listingId) {
+    function removeListing(uint _listingId) external onlyLandlord(_listingId) {
         delete listings[_listingId];
     }
 
@@ -61,7 +61,7 @@ contract Listings {
         return listings[_listingId];
     }
 
-    function getOwner(uint _listingId) public view returns (address) {
-        return listings[_listingId].owner;
+    function getLandlord(uint _listingId) public view returns (address) {
+        return listings[_listingId].landlord;
     }
 }

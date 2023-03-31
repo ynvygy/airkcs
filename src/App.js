@@ -29,8 +29,9 @@ function App() {
         <Tabs />
         <Search />
         <Routes>
-          <Route path="/joins" element={<NewOwner account={account}/>} />
-          <Route path="/listings" element={<Listings account={account}/>} />
+          <Route exact path="/" element={<NewOwner/>} />
+          <Route path="/joins" element={<NewOwner/>} />
+          <Route path="/listings" element={<Listings/>} />
         </Routes>
       </BrowserRouter>
     </div>
