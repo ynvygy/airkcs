@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import { Link } from 'react-router-dom';
+import './nav.css';
 
 const Header = ({ account, setAccount }) => {
   const connectHandler = async (event) => {
@@ -18,38 +19,42 @@ const Header = ({ account, setAccount }) => {
   }
 
   return (
-    <header className="header">
-      <div className="container">
-        <nav className="navbar">
-          <a className="navbar-brand" href="/">
-            <img src="#" alt="Booqueen" />
-          </a>
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to="/joins">List your property</Link>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/">
-                Register
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/">
-                Sign in
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/">
-                { account ? (
-                  <button type="button">{account.slice(0, 6) + '...' + account.slice(38,42)}</button>) :
-                  (<button type="button" onClick={connectHandler}>Connect</button>
-                )}
-              </a>
-            </li>
-          </ul>
-        </nav>
+    <>
+      <nav className="navbar">
+        <div className="navbar-left">
+          <a href="#" style={{ color: "#fff" }}>Booking.com</a>
+        </div>
+        <div className="navbar-right">
+          <span>RON</span>
+          <div className="circle"><img src="https://www.countryflags.io/US/shiny/64.png"/></div>
+          <div className="circle"><span>?</span></div>
+          <a href="#" style={{ color: "#fff" }}>List your property</a>
+          <button className="white-button" style={{ fontSize: "0.6em" }}>Register</button>
+          { account ? (
+            <button className="white-button" style={{ fontSize: "0.6em" }}>{account.slice(0, 6) + '...' + account.slice(38,42)}</button>) :
+            (<button className="white-button" onClick={connectHandler} style={{ fontSize: "0.6em" }}>Sign In</button>
+          )}
+        </div>
+      </nav>
+
+      <div className="buttons">
+        <div className="button-container">
+          <button className="rounded-button" style={{ fontSize: "0.8em" }}>Stays</button>
+          <button className="rounded-button" style={{ fontSize: "0.8em" }}>Flights</button>
+          <button className="rounded-button" style={{ fontSize: "0.8em" }}>Flight + Hotel</button>
+          <button className="rounded-button" style={{ fontSize: "0.8em" }}>Car rentals</button>
+          <button className="rounded-button" style={{ fontSize: "0.8em" }}>Attractions</button>
+          <button className="rounded-button" style={{ fontSize: "0.8em" }}>Airport taxis</button>
+        </div>
       </div>
-    </header>
+
+      <div className="text-wrapper">
+        <h2 style={{ fontSize: "2em", marginBottom: "0" }}>Find your next stay</h2>
+        <p style={{ fontSize: "1em", marginTop: "0.5em" }}>
+          Search deals on hotels, homes, and much more...
+        </p>
+      </div>
+    </>
   );
 };
 

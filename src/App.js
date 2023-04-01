@@ -24,16 +24,18 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header account={account} setAccount={setAccount} />
-        <Tabs />
-        <Search />
-        <Routes>
-          <Route exact path="/" element={<NewOwner/>} />
-          <Route path="/joins" element={<NewOwner/>} />
-          <Route path="/listings" element={<Listings/>} />
-        </Routes>
-      </BrowserRouter>
+      <div class='col-md-7 offset-md-2 mx-auto'>
+        <BrowserRouter>
+          <Header account={account} setAccount={setAccount} />
+          <Tabs />
+          <Search />
+          <Routes>
+            <Route exact path="/" element={<NewOwner/>} />
+            <Route path="/joins" element={<NewOwner/>} />
+            <Route path="/listings" element={<Listings/>} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }
