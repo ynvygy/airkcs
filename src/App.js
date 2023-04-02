@@ -3,9 +3,11 @@ import { ethers } from 'ethers';
 import './App.css';
 import Header from './components/Header';
 import Search from './components/Search';
+import Offers from './components/Offers';
 import Tabs from './components/Tabs';
 import NewOwner from './components/NewOwner';
 import Listings from './components/Listings';
+import Browse from './components/Browse';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -24,11 +26,13 @@ function App() {
 
   return (
     <div className="App">
-      <div class='col-md-7 offset-md-2 mx-auto'>
+      <div>
         <BrowserRouter>
           <Header account={account} setAccount={setAccount} />
           <Tabs />
           <Search />
+          <Offers />
+          <Browse />
           <Routes>
             <Route exact path="/" element={<NewOwner/>} />
             <Route path="/joins" element={<NewOwner/>} />

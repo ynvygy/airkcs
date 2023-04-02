@@ -3,3 +3,12 @@ input[type="checkbox"] {
   width: 20px;
   height: 20px;
 }
+
+.text-wrapper {
+  text-align: left;
+  padding-top: 50px;
+}
+
+.search-background {
+  background-image: linear-gradient(to bottom, #003b95 80%, #FFFFFF 80%);
+}
