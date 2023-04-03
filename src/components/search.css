@@ -10,5 +10,5 @@ input[type="checkbox"] {
 }
 
 .search-background {
-  background-image: linear-gradient(to bottom, #003b95 80%, #FFFFFF 80%);
+  background-image: linear-gradient(to bottom, #003580 80%, #FFFFFF 20%);
 }

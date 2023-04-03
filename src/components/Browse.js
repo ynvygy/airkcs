@@ -6,7 +6,7 @@ import Villas from '../images/villas.jpeg';
 const Browse = () => {
   return (
     <div className='col-md-7 offset-md-2 mx-auto'>
-      <div style={{ textAlign: "left" }}>
+      <div style={{ textAlign: "left", marginTop: "20px" }}>
         <h4>Browse by property type</h4>
       </div>
       <div style={{ 
