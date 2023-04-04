@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import UsaFlag from '../images/usa.png';
 import './nav.css';
 
-const Header = ({ account, setAccount }) => {
+const Nav = ({ account, setAccount }) => {
   const connectHandler = async (event) => {
     try {
       event.preventDefault();
@@ -102,4 +102,4 @@ const Header = ({ account, setAccount }) => {
   );
 };
 
-export default Header;
+export default Nav;

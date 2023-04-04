@@ -1,5 +1,5 @@
 import './search.css';
-const Search = () => {
+const Search = ({handleSearch}) => {
   return (
     <>
       <div className="search-background">
