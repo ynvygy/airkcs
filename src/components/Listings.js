@@ -140,7 +140,8 @@ const Listings = ({account}) => {
         <div className="col-md-9">
           <div className="row">
             <div className="col-md-8" style={{paddingTop: "20px"}}>
-              <p style={{fontSize: "1.45em", textAlign: 'left'}}><strong>Inflation: 1 property found</strong></p>
+              <p style={{fontSize: "1.45em", textAlign: 'left', marginBottom: '0px'}}><strong>Inflation: 3 properties found</strong></p>
+              <p style={{fontSize: "1em", textAlign: 'left', paddingTop: "0px", color: "gray"}}> + 6 properties around Solotvyno </p>
             </div>
             <div className="col-md-4" style={{height: "120px", width: "30%", margin: "auto"}}>
               <div style={{ 
