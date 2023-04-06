@@ -1,5 +1,12 @@
 import MyMap from '../images/map.png';
 import HotelOne from '../images/hotel1.jpeg';
+import Letter from '../images/letter.png';
+import Swiss from '../images/swiss.png';
+import Facilities from '../images/facilities.png'
+import RoomOne from '../images/room1.png'
+import RoomTwo from '../images/room2.png'
+import People from '../images/people.png'
+import Choices from '../images/choices.png'
 
 const Listing = ({account}) => {
   return (
@@ -237,13 +244,55 @@ const Listing = ({account}) => {
                       </div>
                     </div>
                     <div className="col-md-5" style={{marginTop: "10px", marginLeft: "325px"}}>
-                      <div style={{backgroundColor: 'white', borderRadius: "3px"}}>Review</div>
+                      <div style={{backgroundColor: 'white', borderRadius: "3px"}}>
+                      {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/></svg>
+                      */}
+                        <div className="row" style={{backgroundColor: '#ebf3ff', margin: "0px"}}>
+                          <p style={{fontSize: "0.75em", textAlign: "left", marginTop: "5px"}}>Great place to spend money. I don't remember being so happy to max out my credit card. But it was worth every penny that i don't have anymore. You only live once !</p>
+                        </div>
+                        <div className="row" style={{paddingBottom: "0px", paddingTop: "3px"}}>
+                          <div className="col-md-1"
+                            style={{ 
+                              border: "1px solid #e8e8e8",
+                              borderRadius: "50px",
+                              padding: "12px",
+                              paddingRight: "12px",
+                              marginLeft: "20px",
+                              width: "1px",
+                              height: "1px",
+                              backgroundImage: `url(${Letter})`, 
+                              backgroundSize: 'cover'  
+                            }}>
+                          </div>
+                          <div className="col-md-2" style={{paddingLeft: "6px"}}>
+                            <p style={{fontSize:"0.8em", marginTop: "3px", marginBottom: "10px"}}>Emily</p>
+                          </div>
+                          <div className="col-md-1"
+                            style={{
+                              marginTop: "6px", 
+                              border: "1px solid #e8e8e8",
+                              padding: "5px",
+                              paddingLeft: "10px",
+                              width: "1%",
+                              height: "1%",
+                              backgroundImage: `url(${Swiss})`, 
+                              backgroundSize: 'cover'  
+                            }}>
+                          </div>
+                          <div className="col-md-4" style={{paddingLeft: "6px"}}>
+                            <p style={{fontSize:"0.8em", marginTop: "3px", marginBottom: "10px"}}>Switzerland</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div className="col-md-5" style={{marginTop: "10px", marginLeft: "325px"}}>
-                      <div className="row">
-                        <div style={{backgroundColor: 'white', borderRadius: "3px"}}>
-                          <strong><p style={{fontSize: "0.95em", textAlign: "left", marginTop: "8px", width:"80%"}}>Excellent location!</p></strong>
-                          <div col-m-1 style={{width: "15%", backgroundColor: "white", margin: "1px", borderRadius: "7px 7px 7px 0", marginTop: "8px", paddingLeft: "7px", marginBottom: "8px", border: "1px solid black"}}>
+                      <div className="row" style={{backgroundColor: 'white', borderRadius: "3px", marginLeft: "0px", marginRight: "0px"}}>
+                        <div className="col-md-9">
+                          <strong><p style={{fontSize: "0.88em", textAlign: "left", marginTop: "15px", width:"100%", marginBottom: "2px"}}>Excellent location!</p></strong>
+                        </div>
+                        <div className="col-md-3" style={{paddingLeft: "4px", paddingRight: "18px"}}>
+                          <div col-m-1 style={{paddingTop: "7px", width: "115%", height:"38px", backgroundColor: "white", margin: "3px", borderRadius: "7px 7px 7px 0", marginTop: "8px", marginBottom: "8px", border: "1px solid black"}}>
                             <p style={{color: 'black', marginBottom: "10px"}}>9.9</p>
                           </div>
                         </div>
@@ -316,7 +365,7 @@ const Listing = ({account}) => {
           </div>
         </div>
      
-        <div className="row" style={{marginTop: "15px"}}>
+        <div className="row" style={{marginTop: "15px", marginBottom: "15px"}}>
           <div className="col-md-8" style={{marginLeft: "80px", width: "62%"}}>
             <p style={{textAlign: "left", fontSize: "0.95em"}}>Located near the city of Inflation, our hotel is the perfect accommodation option for those looking to explore the vibrant city of Inflation while still enjoying a peaceful and relaxing stay. Our prime location offers easy access to all the city's popular tourist destinations, while being situated just far enough away to ensure a quiet and tranquil retreat.</p>
 
@@ -329,8 +378,14 @@ const Listing = ({account}) => {
             <p style={{textAlign: "left", fontSize: "0.95em"}}><strong>Hotel Poje has been welcoming Booking.com guests since Mar 15, 2020</strong></p>
 
             <strong><p style={{textAlign: "left", fontSize: "1em"}}>Most popular facilities</p></strong>
-            <div>
-              Stuff
+            <div className="col-md-10"
+              style={{
+                backgroundImage: `url(${Facilities})`, 
+                backgroundSize: 'cover',
+                width: "600px",
+                height: "75px",
+                marginBottom: "20px"  
+              }}>
             </div>
           </div>
           <div className="col-md-4" style={{backgroundColor: "#e4f4ff", width: "25%", height: "270px"}}>
@@ -363,13 +418,17 @@ const Listing = ({account}) => {
           </div>
         </div>
 
+        <div className="row" style={{borderBottom: "1px solid #e7e7e7", width: "87%", marginLeft: "80px", marginBottom: "5px"}}>
+
+        </div>
+
         <div className="row">
           <div className="availability">
             <div className="row">
               <div className="col-md-12" style={{marginLeft: "80px"}}>
                 <div className="row">
                   <div className="col-md-8">
-                    <p style={{fontSize: "2em", textAlign:"left"}}><strong>Availability</strong></p>
+                    <p style={{fontSize: "1.5em", textAlign:"left"}}><strong>Availability</strong></p>
                   </div>
                   <div className="col-md-3">
                     <div className="row" style={{textAlign: "center", justifyContent: "center"}}>
@@ -403,7 +462,7 @@ const Listing = ({account}) => {
                             <path d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z" fill="currentColor"/>
                           </svg>
                         </div>
-                        <button style={{width: '20%', padding: '3px', backgroundColor: '#0071c2', color: 'white', borderRadius: '3px', height: '3.6vh', border: 'none', fontSize: "1.25em"}}>Change search</button>
+                        <button style={{width: '20%', backgroundColor: '#0071c2', color: 'white', borderRadius: '3px', height: '3.6vh', border: 'none', fontSize: "0.9em", paddingBottom: "5px"}}>Change search</button>
                       </div>
                     </form>
                   </div>
@@ -413,8 +472,124 @@ const Listing = ({account}) => {
           </div>
         </div>
         <div className="row">
-          <div className="room-type-table">
-            Final table
+          <div className="room-type-table" style={{marginLeft:"80px", width: "87.5%", marginTop: "20px"}}>
+            <table>
+              <thead>
+                <tr style={{ backgroundColor: '#4c76b2', color: 'white' }}>
+                  <th style={{width: "25%", border: '1px solid #5bbaff', textAlign: "left", fontSize: "0.9em", paddingLeft: "5px"}}>Room Type</th>
+                  <th style={{width: "5%", border: '1px solid #5bbaff', fontSize: "0.9em"}}>Sleeps</th>
+                  <th style={{width: "15%", backgroundColor: "#003580", border: '1px solid #5bbaff', fontSize: "0.9em"}}>Price for 1 week</th>
+                  <th style={{width: "20%", border: '1px solid #5bbaff', textAlign: "left", fontSize: "0.9em"}}>Your Choices</th>
+                  <th style={{width: "5%", border: '1px solid #5bbaff', fontSize: "0.9em"}}>Select<br/> Rooms</th>
+                  <th style={{width: "20%", border: '1px solid #5bbaff', fontSize: "0.9em"}}></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div
+                      style={{
+                        backgroundImage: `url(${RoomOne})`, 
+                        backgroundSize: 'cover',
+                        width: "300px",
+                        height: "400px",
+                      }}>
+                    </div>
+                  </td>
+                  <td style={{border: '1px solid #5bbaff'}}>
+                    <div
+                      style={{
+                        backgroundImage: `url(${People})`, 
+                        backgroundSize: 'cover',
+                        width: "50px",
+                        height: "30px",
+                        marginBottom: "370px"
+                      }}>
+                    </div>
+                  </td>
+                  <td style={{border: '1px solid #5bbaff', paddingLeft:"6px"}}>
+                    <strong><p style={{marginBottom: "0px", fontSize: "0.98em", textAlign: "left"}}>1,337 ETH</p></strong>
+                    <p style={{marginBottom: "347px", textAlign: "left", fontSize: "0.8em"}}>Includes taxes and fees</p>
+                  </td>
+                  <td style={{border: '1px solid #5bbaff'}}>
+                    <div
+                      style={{
+                        backgroundImage: `url(${Choices})`, 
+                        backgroundSize: 'cover',
+                        width: "220px",
+                        height: "105px",
+                        marginBottom: "290px"
+                      }}>
+                    </div>
+                  </td>
+                  <td style={{border: '1px solid #5bbaff', width: "3%"}}>
+                    <select style={{fontSize: "0.85em", overflow: "auto", width: "90%",marginBottom: "365px", boxSizing: "border-box"}}>
+                        <option value="apple" selected>0</option>
+                        <option value="apple">1 (1.337 ETH)</option>
+                        <option value="banana">2 (2.674 ETH)</option>
+                        <option value="orange">3 (4.011 ETH)</option>
+                      </select>
+                  </td>
+                  <button style={{ backgroundColor: "#0071c2", color: "#fff", width: '86%', fontSize: "16px", height: "35px", border: 'none', marginTop: "10px", marginBottom: "10px"}}>
+                    <p style={{marginTop: "4px", fontSize: "0.9em"}}>I'll reserve</p>
+                  </button>
+                  <ul style={{fontSize: "0.9em", paddingLeft: "16px"}}>
+                    <li style={{listStylePosition: "inside", textAlign: "left"}}>
+                      Confirmation is immediate
+                    </li>
+                    <li style={{listStylePosition: "inside", textAlign: "left"}}>
+                      No booking or credit card fees!
+                    </li>
+                  </ul>
+                </tr>
+                <tr>
+                  <td style={{borderTop: "2px solid #5bbaff"}}>
+                    <div
+                      style={{
+                        backgroundImage: `url(${RoomTwo})`, 
+                        backgroundSize: 'cover',
+                        width: "300px",
+                        height: "400px",
+                      }}>
+                    </div>
+                  </td>
+                  <td style={{border: '1px solid #5bbaff', borderTop: "2px solid #5bbaff"}}>
+                    <div
+                      style={{
+                        backgroundImage: `url(${People})`, 
+                        backgroundSize: 'cover',
+                        width: "50px",
+                        height: "30px",
+                        marginBottom: "370px"
+                      }}>
+                    </div>
+                  </td>
+                  <td style={{border: '1px solid #5bbaff', paddingLeft:"6px", borderTop: "2px solid #5bbaff"}}>
+                    <strong><p style={{marginBottom: "0px", fontSize: "0.98em", textAlign: "left"}}>1,337 ETH</p></strong>
+                    <p style={{marginBottom: "347px", textAlign: "left", fontSize: "0.8em"}}>Includes taxes and fees</p>
+                  </td>
+                  <td style={{border: '1px solid #5bbaff', borderTop: "2px solid #5bbaff"}}>
+                    <div
+                      style={{
+                        backgroundImage: `url(${Choices})`, 
+                        backgroundSize: 'cover',
+                        width: "220px",
+                        height: "105px",
+                        marginBottom: "290px"
+                      }}>
+                    </div>
+                  </td>
+                  <td style={{border: '1px solid #5bbaff', fontSize: "1em", width: "3%", borderTop: "2px solid #5bbaff"}}>
+                    <select style={{fontSize: "0.85em", overflow: "auto", width: "90%",marginBottom: "365px", boxSizing: "border-box"}}>
+                      <option value="apple" selected>0</option>
+                      <option value="apple">1 (1.337 ETH)</option>
+                      <option value="banana">2 (2.674 ETH)</option>
+                      <option value="orange">3 (4.011 ETH)</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

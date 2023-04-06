@@ -152,7 +152,8 @@ const Listings = ({account}) => {
                   height: "70%",
                   backgroundImage: `url(${MyMap})`, 
                   backgroundSize: 'cover',
-                  boxShadow: "50 50 5px rgba(0,0,5,0.5)"
+                  boxShadow: "50 50 5px rgba(0,0,5,0.5)",
+                  marginLeft: "65px"
                 }}>
                 <button style={{ backgroundColor: "#0071c2", color: "#fff", width: '80%', fontSize: "14px", height: "30px", border: 'none'}}>
                   Show on Map
@@ -164,6 +165,10 @@ const Listings = ({account}) => {
             <div className="button-container" style={{ fontSize: "0.85em" }}>
               <a href="#" className="left-button" style={{ fontSize: "1em", textDecoration: 'none', display: 'flex' }}>
                 Sort by: Top picks for long stays
+              
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ paddingRight: '10px', width: '28px', fill: "#0071c2", strokeWidth: "10px", marginLeft: "10px", paddingBottom: "3px" }}>
+                <path d="M12 20.09a1.24 1.24 0 0 1-.88-.36L6 14.61a.75.75 0 1 1 1.06-1.06L12 18.49l4.94-4.94A.75.75 0 0 1 18 14.61l-5.12 5.12a1.24 1.24 0 0 1-.88.36zm6-9.46a.75.75 0 0 0 0-1.06l-5.12-5.11a1.24 1.24 0 0 0-1.754-.006l-.006.006L6 9.57a.75.75 0 0 0 0 1.06.74.74 0 0 0 1.06 0L12 5.7l4.94 4.93a.73.73 0 0 0 .53.22c.2 0 .39-.078.53-.22z"/>
+              </svg>
               </a>
             </div>
         </div>
