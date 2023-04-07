@@ -1,5 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import './search.css';
+
 const Search = ({handleSearch}) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="search-background">
@@ -39,7 +43,7 @@ const Search = ({handleSearch}) => {
                   <path d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z" fill="currentColor"/>
                 </svg>
               </div>
-              <button style={{width: '10%', padding: '5px', backgroundColor: '#0071c2', color: 'white', borderRadius: '3px', height: '5.7vh', border: 'none', fontSize: "1.25em"}}>Search</button>
+              <button onClick={() => navigate('/listings')} style={{width: '10%', padding: '5px', backgroundColor: '#0071c2', color: 'white', borderRadius: '3px', height: '5.7vh', border: 'none', fontSize: "1.25em"}} onMouseOver={(e) => e.target.style.backgroundColor = '#003580'} onMouseOut={(e) => e.target.style.backgroundColor = '#0071c2'} >Search</button>
             </div>
             <label style={{ display: "flex", alignItems: "center", marginTop: "10px", fontSize: "1em" }}>
               <input type="checkbox" style={{ borderRadius: "2px", marginRight: "8px", fontSize: "0.9em" }} />

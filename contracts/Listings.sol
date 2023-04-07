@@ -14,6 +14,10 @@ contract Listings {
 
     mapping(uint => Listing) public listings;
 
+    event ListingCreated(uint indexed id, uint price, string location, uint timestamp)
+    event ListingUpdated(uint indexed id, uint price, string location, uint timestamp)
+    event ListingRemoved(uint indexed id, uint timestamp)
+
     modifier onlyLandlord(uint _listingId) {
         require(
             msg.sender == listings[_listingId].landlord,
@@ -35,6 +39,8 @@ contract Listings {
         listings[listingId].location = location;
         listings[listingId].description = description;
         listings[listingId].landlord = msg.sender;
+    
+        emit ListingCreated(nextListingId, price, location, block.timestamp)
 
         nextListingId++;
     }
@@ -51,10 +57,14 @@ contract Listings {
         listings[_listingId].location = _location;
         listings[_listingId].description = _description;
         listings[_listingId].landlord = msg.sender;
+
+        emit ListingUpdated(nextListingId, price, location, block.timestamp)
     }
 
     function removeListing(uint _listingId) external onlyLandlord(_listingId) {
         delete listings[_listingId];
+
+        emit ListingRemoved(_listingId, block.timestamp)
     }
 
     function getListing(uint _listingId) public view returns (Listing memory) {

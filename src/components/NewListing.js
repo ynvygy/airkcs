@@ -2,8 +2,9 @@ import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 
-const NewOwner = ({account}) => {
+const NewListing = ({account}) => {
   console.log(account)
+  const [image, setImage] = useState('')
   const [uri, setUri] = useState("")
   const [price, setPrice] = useState(0)
   const [location, setLocation] = useState("")
@@ -20,6 +21,9 @@ const NewOwner = ({account}) => {
   return (
     <Form className="m-2">
       <h2 className="d-flex justify-content-center">Create listing</h2>
+      <Form.Group className="m-2">
+      <Form.Control type="file" name="file"/>
+      </Form.Group>
       <Form.Group className="m-2">
         <label htmlFor="uri">IPFS URI</label>
         <Form.Control type="text" name="uri" placeholder="IPS URI" value={uri} onChange={(e) => setUri(e.target.value)}/>
@@ -43,4 +47,4 @@ const NewOwner = ({account}) => {
   )
 }
 
-export default NewOwner;
+export default NewListing;

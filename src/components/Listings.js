@@ -1,9 +1,11 @@
 import './listings.css';
 import MyMap from '../images/map.png';
-
 import HotelOne from '../images/hotel1.jpeg';
+import { useNavigate } from 'react-router-dom';
 
 const Listings = ({account}) => {
+  const navigate = useNavigate();
+
   const getListings = async () => {
     if (!account) {
       alert("Please connect to metamask");
@@ -199,7 +201,7 @@ const Listings = ({account}) => {
             </div>
             <div className="col-md-7" style={{width: "50%", paddingLeft: "0px"}}>
               <div className="hotel-text" style={{margin: "10px", textAlign: 'left'}}>
-                <h5 style={{color: "#0071c2", display: 'inline-block', paddingRight: "10px"}}>Hotel Poje</h5>
+                <a href="#" onClick={() => navigate('/joins')}><h5 style={{color: "#0071c2", display: 'inline-block', paddingRight: "10px"}} onMouseOver={(e) => e.target.style.color = 'black'} onMouseOut={(e) => e.target.style.color = '#0071c2'}>Hotel Poje</h5></a>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '15px', fill: "white" }}>
                   <path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z" fill="#ffb700"/>
                 </svg>

@@ -7,8 +7,10 @@ import RoomOne from '../images/room1.png'
 import RoomTwo from '../images/room2.png'
 import People from '../images/people.png'
 import Choices from '../images/choices.png'
+import { ethers } from 'ethers';
 
 const Listing = ({account}) => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
   return (
     <>
       <div style={{backgroundColor: "#fef3ec", fontSize: "1em", fontWeight: "bold"}}>
@@ -530,7 +532,22 @@ const Listing = ({account}) => {
                         <option value="orange">3 (4.011 ETH)</option>
                       </select>
                   </td>
-                  <button style={{ backgroundColor: "#0071c2", color: "#fff", width: '86%', fontSize: "16px", height: "35px", border: 'none', marginTop: "10px", marginBottom: "10px"}}>
+                  <button style={{ backgroundColor: "#0071c2", color: "#fff", width: '86%', fontSize: "16px", height: "35px", border: 'none', marginTop: "10px", marginBottom: "10px"}}
+                    onClick={async () => {
+                      console.log(account)
+                      try {
+                        const signer = provider.getSigner();
+                        const transaction = {
+                          to: '0x123...', // replace with the recipient's address
+                          value: ethers.utils.parseEther('1')
+                        };
+                        const tx = await signer.sendTransaction(transaction);
+                        console.log(tx);
+                      } catch (error) {
+                        console.error(error);
+                      }
+                    }}
+                  >
                     <p style={{marginTop: "4px", fontSize: "0.9em"}}>I'll reserve</p>
                   </button>
                   <ul style={{fontSize: "0.9em", paddingLeft: "16px"}}>
