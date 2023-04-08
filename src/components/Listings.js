@@ -2,18 +2,58 @@ import './listings.css';
 import MyMap from '../images/map.png';
 import HotelOne from '../images/hotel1.jpeg';
 import { useNavigate } from 'react-router-dom';
+import { Buffer } from 'buffer';
+import { create } from 'ipfs-http-client'
+import { ethers } from 'ethers';
+import React, { useEffect, useState } from 'react';
+
+import { Button } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+
+const projectId = process.env.REACT_APP_INFURA_API_KEY
+const projectSecret = process.env.REACT_APP_INFURA_API_SECRET
+const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+const client = create({
+  host: 'ipfs.infura.io',
+  port: 5001,
+  protocol: 'https',
+  apiPath: '/api/v0',
+  headers: {
+    authorization: auth,
+  }
+})
+
+const ListingsABI = [
+  "event ListingCreated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
+  "event ListingRemoved(uint256 indexed id, uint256 timestamp)",
+  "event ListingUpdated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
+  "function createListing(string image, uint256 price, string location, string description)",
+  "function getLandlord(uint256 _listingId) view returns (address)",
+  "function getListing(uint256 _listingId) view returns (tuple(string image, uint256 price, string location, string description, address landlord))",
+  "function getListings() view returns (tuple(string image, uint256 price, string location, string description, address landlord)[])",
+  "function listings(uint256) view returns (string image, uint256 price, string location, string description, address landlord)",
+  "function removeListing(uint256 _listingId)",
+  "function updateListing(uint256 _listingId, string _image, uint256 _price, string _location, string _description)"
+]
+
+const contractAddress = '0xe7f1725e7734ce288f8367e1bb143e90bb3f0512';
+const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
+const signer = provider.getSigner();
+const listingsContract = new ethers.Contract(contractAddress, ListingsABI, signer);
 
 const Listings = ({account}) => {
   const navigate = useNavigate();
+  const [listings, setListings] = useState([]);
 
   const getListings = async () => {
-    if (!account) {
-      alert("Please connect to metamask");
-      return;
-      }
-      await account.getListings().then(() => alert("success")).catch((error) => alert(error.message))
+    const listings = await listingsContract.getListings();
+    setListings(listings)
+    console.log(listings);
   };
 
+  useEffect(() => {
+    getListings();
+  }, []);
 
   return (
     <div className='col-md-8 offset-md-2 mx-auto'>
@@ -237,7 +277,7 @@ const Listings = ({account}) => {
                   <p style={{fontSize: "1em", marginBottom: "0px", textAlign: "right" }}>Excellent</p>
                   <p style={{fontSize: "0.8em", textAlign: "right", marginBottom: "0px"}}>1,337 reviews</p>
                 </div>
-                <div col-m-1 style={{width: "20%", backgroundColor: "#003b95", margin: "1px", borderRadius: "7px 7px 7px 0", marginTop: "18px", paddingLeft: "7px", paddingTop: "5px"}}>
+                <div col-md-1 style={{width: "20%", backgroundColor: "#003b95", margin: "1px", borderRadius: "7px 7px 7px 0", marginTop: "18px", paddingLeft: "7px", paddingTop: "5px"}}>
                   <p style={{color: 'white', marginBottom: "10px"}}>9.9</p>
                 </div>
                 <p style={{color: "#0071c2", fontWeight: "bold", textAlign: "right", fontSize: "0.9em"}}>Comfort 9.9</p>
@@ -302,7 +342,7 @@ const Listings = ({account}) => {
                   <p style={{fontSize: "1em", marginBottom: "0px", textAlign: "right" }}>Excellent</p>
                   <p style={{fontSize: "0.8em", textAlign: "right", marginBottom: "0px"}}>1,337 reviews</p>
                 </div>
-                <div col-m-1 style={{width: "20%", backgroundColor: "#003b95", margin: "1px", borderRadius: "7px 7px 7px 0", marginTop: "18px", paddingLeft: "7px", paddingTop: "5px"}}>
+                <div col-md-1 style={{width: "20%", backgroundColor: "#003b95", margin: "1px", borderRadius: "7px 7px 7px 0", marginTop: "18px", paddingLeft: "7px", paddingTop: "5px"}}>
                   <p style={{color: 'white', marginBottom: "10px"}}>9.9</p>
                 </div>
                 <p style={{color: "#0071c2", fontWeight: "bold", textAlign: "right", fontSize: "0.9em"}}>Comfort 9.9</p>
@@ -367,7 +407,7 @@ const Listings = ({account}) => {
                   <p style={{fontSize: "1em", marginBottom: "0px", textAlign: "right" }}>Excellent</p>
                   <p style={{fontSize: "0.8em", textAlign: "right", marginBottom: "0px"}}>1,337 reviews</p>
                 </div>
-                <div col-m-1 style={{width: "20%", backgroundColor: "#003b95", margin: "1px", borderRadius: "7px 7px 7px 0", marginTop: "18px", paddingLeft: "7px", paddingTop: "5px"}}>
+                <div col-md-1 style={{width: "20%", backgroundColor: "#003b95", margin: "1px", borderRadius: "7px 7px 7px 0", marginTop: "18px", paddingLeft: "7px", paddingTop: "5px"}}>
                   <p style={{color: 'white', marginBottom: "10px"}}>9.9</p>
                 </div>
                 <p style={{color: "#0071c2", fontWeight: "bold", textAlign: "right", fontSize: "0.9em"}}>Comfort 9.9</p>
@@ -386,6 +426,23 @@ const Listings = ({account}) => {
             </div>
           </div>
         </div>
+      </div>
+      <p>Results Test</p>
+      <Form.Group className="m-2 mt-4">
+        <Button variant="success" onClick={getListings}>Get</Button>
+      </Form.Group>
+      <div>
+        <h1>Listings</h1>
+        <ul>
+          {listings.map((listing, index) => (
+            <li key={index}>
+              <img src={listing.image}/>
+              {listing.price.toString()}
+              {listing.location.toString()}
+
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )

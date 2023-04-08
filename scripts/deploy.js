@@ -4,18 +4,37 @@
 // You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
-const hre = require("hardhat");
+const hardhat = require("hardhat");
+const fs = require("fs/promises")
 
 async function main() {
-  const Escrow = await ethers.getContractFactory("Escrow");
+  const Escrow = await hre.ethers.getContractFactory("Escrow");
   const escrowContract = await Escrow.deploy();
+  await escrowContract.deployed()
 
   console.log("Escrow contract deployed to:", escrowContract.address);
 
-  const Listings = await ethers.getContractFactory("Listings");
+  const Listings = await hre.ethers.getContractFactory("Listings");
   const listingsContract = await Listings.deploy();
+  await listingsContract.deployed()
 
   console.log("Listings contract deployed to:", listingsContract.address);
+
+  await writeDeploymentInfo("escrow", escrowContract)
+  await writeDeploymentInfo("listings" ,listingsContract)
+}
+
+async function writeDeploymentInfo(filename, contract) {
+  const data = {
+    contract: {
+      address: contract.address,
+      signerAddress: contract.signer.address,
+      abi: contract.interface.format()
+    }
+  }
+
+  const content = JSON.stringify(data, null, 2);
+  await fs.writeFile(`${filename}-contract.json`, content, { encoding: "utf-8"})
 }
 
 // We recommend this pattern to be able to use async/await everywhere

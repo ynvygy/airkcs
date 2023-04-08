@@ -29,7 +29,7 @@ function App() {
           <Nav account={account} setAccount={setAccount} />
           <Routes>
             <Route exact path="/" element={<MainPage/>} />
-            <Route path="/joins" element={<NewListing/>} />
+            <Route path="/joins" element={<NewListing account={account}/>} />
             <Route path="/listings" element={<Listings/>} />
             <Route path="/listing" element={<Listing />} />
           </Routes>
