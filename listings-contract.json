@@ -6,11 +6,12 @@
       "event ListingCreated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
       "event ListingRemoved(uint256 indexed id, uint256 timestamp)",
       "event ListingUpdated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
-      "function createListing(string image, uint256 price, string location, string description)",
+      "function createListing(string name, uint256 stars, string image, uint256 price, string location, string description)",
       "function getLandlord(uint256 _listingId) view returns (address)",
-      "function getListing(uint256 _listingId) view returns (tuple(string image, uint256 price, string location, string description, address landlord))",
-      "function getListings() view returns (tuple(string image, uint256 price, string location, string description, address landlord)[])",
-      "function listings(uint256) view returns (string image, uint256 price, string location, string description, address landlord)",
+      "function getListing(uint256 _listingId) view returns (tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord))",
+      "function getListings() view returns (uint256[], tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)[])",
+      "function listings(uint256) view returns (string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)",
+      "function nextListingId() view returns (uint256)",
       "function removeListing(uint256 _listingId)",
       "function updateListing(uint256 _listingId, string _image, uint256 _price, string _location, string _description)"
     ]

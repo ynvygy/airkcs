@@ -39,6 +39,8 @@ contract Listings {
     }
 
     function createListing(
+        string memory name,
+        uint stars,
         string memory image,
         uint price,
         string memory location,
@@ -46,6 +48,8 @@ contract Listings {
     ) external {
         uint listingId = nextListingId;
 
+        listings[listingId].name = name;
+        listings[listingId].stars = stars;
         listings[listingId].image = image;
         listings[listingId].price = price;
         listings[listingId].location = location;
@@ -83,14 +87,20 @@ contract Listings {
         return listings[_listingId];
     }
 
-    function getListings() public view returns (Listing[] memory) {
+    function getListings()
+        public
+        view
+        returns (uint[] memory, Listing[] memory)
+    {
+        uint[] memory ids = new uint[](nextListingId);
         Listing[] memory result = new Listing[](nextListingId);
 
         for (uint i = 0; i < nextListingId; i++) {
+            ids[i] = i;
             result[i] = listings[i];
         }
 
-        return result;
+        return (ids, result);
     }
 
     function getLandlord(uint _listingId) public view returns (address) {

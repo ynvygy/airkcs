@@ -8,8 +8,10 @@ import RoomTwo from '../images/room2.png'
 import People from '../images/people.png'
 import Choices from '../images/choices.png'
 import { ethers } from 'ethers';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Listing = ({account}) => {
+  const { listingId } = useParams();
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   return (
     <>

@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import { Link } from 'react-router-dom';
 import UsaFlag from '../images/usa.png';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './nav.css';
 
@@ -20,6 +21,25 @@ const Nav = ({ account, setAccount }) => {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    async function checkAccount() {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+
+          if (accounts.length > 0) {
+            const account = ethers.utils.getAddress(accounts[0]);
+            setAccount(account);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+
+    checkAccount();
+  }, []);
 
   return (
     <>

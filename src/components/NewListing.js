@@ -22,11 +22,11 @@ const ListingsABI = [
   "event ListingCreated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
   "event ListingRemoved(uint256 indexed id, uint256 timestamp)",
   "event ListingUpdated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
-  "function createListing(string image, uint256 price, string location, string description)",
+  "function createListing(string name, uint256 stars, string image, uint256 price, string location, string description)",
   "function getLandlord(uint256 _listingId) view returns (address)",
-  "function getListing(uint256 _listingId) view returns (tuple(string image, uint256 price, string location, string description, address landlord))",
-  "function getListings() view returns (tuple(string image, uint256 price, string location, string description, address landlord)[])",
-  "function listings(uint256) view returns (string image, uint256 price, string location, string description, address landlord)",
+  "function getListing(uint256 _listingId) view returns (tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord))",
+  "function getListings() view returns (tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)[])",
+  "function listings(uint256) view returns (string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)",
   "function removeListing(uint256 _listingId)",
   "function updateListing(uint256 _listingId, string _image, uint256 _price, string _location, string _description)"
 ]
@@ -50,6 +50,8 @@ async function onChange(e) {
 const NewListing = ({account}) => {
   const [image, setImage] = useState('')
   const [uri, setUri] = useState("")
+  const [name, setName] = useState("")
+  const [stars, setStars] = useState(0)
   const [price, setPrice] = useState(0)
   const [location, setLocation] = useState("")
   const [description, setDescription] = useState("")
@@ -59,7 +61,7 @@ const NewListing = ({account}) => {
       alert("Please connect to metamask");
       return;
       }
-      await listingsContract.createListing(uri, price, location, description).then(() => alert("success")).catch((error) => alert(error.message))
+      await listingsContract.createListing(name, stars, uri, price, location, description).then(() => alert("success")).catch((error) => alert(error.message))
   };
 
   const getListings = async () => {
@@ -86,6 +88,14 @@ const NewListing = ({account}) => {
       <h2 className="d-flex justify-content-center">Create listing</h2>
       <Form.Group className="m-2">
       <Form.Control type="file" name="file" onChange={uploadToIPFS}/>
+      </Form.Group>
+      <Form.Group className="m-2">
+        <label htmlFor="name">Name</label>
+        <Form.Control type="text" name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+      </Form.Group>
+      <Form.Group className="m-2">
+        <label htmlFor="stars">Stars</label>
+        <Form.Control type="text" name="stars" placeholder="Stars" value={stars} onChange={(e) => setStars(e.target.value)}/>
       </Form.Group>
       <Form.Group className="m-2">
         <label htmlFor="uri">IPFS URI</label>

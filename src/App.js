@@ -32,6 +32,7 @@ function App() {
             <Route path="/joins" element={<NewListing account={account}/>} />
             <Route path="/listings" element={<Listings/>} />
             <Route path="/listing" element={<Listing />} />
+            <Route path="/listing/:listingId" element={<Listing />} />
           </Routes>
         </BrowserRouter>
       </div>

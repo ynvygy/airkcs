@@ -20,6 +20,35 @@ async function main() {
 
   console.log("Listings contract deployed to:", listingsContract.address);
 
+  // Create some initial listings
+  await listingsContract.createListing(
+    "Beautiful house with pool",
+    4,
+    "https://cloudflare-ipfs.com/ipfs/QmNc976UqzyFFXC9gmEffvANL4AQUUHKNRZy9nb1KZogsd",
+    ethers.utils.parseEther("2.5"),
+    "Miami, FL",
+    "This beautiful house has everything you need for a comfortable stay."
+  );
+
+  await listingsContract.createListing(
+    "Cozy apartment in the city center",
+    5,
+    "https://cloudflare-ipfs.com/ipfs/QmNc976UqzyFFXC9gmEffvANL4AQUUHKNRZy9nb1KZogsd",
+    ethers.utils.parseEther("1.5"),
+    "New York, NY",
+    "This cozy apartment is perfect for a short stay in the city."
+  );
+  await listingsContract.createListing(
+    "Luxury villa with ocean view",
+    5,
+    "https://cloudflare-ipfs.com/ipfs/QmNc976UqzyFFXC9gmEffvANL4AQUUHKNRZy9nb1KZogsd",
+    ethers.utils.parseEther("10"),
+    "Bali, Indonesia",
+    "This luxurious villa offers breathtaking views of the ocean."
+  );
+  console.log(await listingsContract.getListings())
+  console.log("Seed listings created.");
+
   await writeDeploymentInfo("escrow", escrowContract)
   await writeDeploymentInfo("listings" ,listingsContract)
 }
