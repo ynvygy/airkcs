@@ -11,7 +11,6 @@
       "function getListing(uint256 _listingId) view returns (tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord))",
       "function getListings() view returns (uint256[], tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)[])",
       "function listings(uint256) view returns (string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)",
-      "function nextListingId() view returns (uint256)",
       "function removeListing(uint256 _listingId)",
       "function updateListing(uint256 _listingId, string _image, uint256 _price, string _location, string _description)"
     ]

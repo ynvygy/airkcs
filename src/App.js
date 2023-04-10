@@ -5,19 +5,26 @@ import Nav from './components/Nav';
 import NewListing from './components/NewListing';
 import Listings from './components/Listings';
 import Listing from './components/Listing';
+import LegacyListings from './components/LegacyListings';
 import MainPage from './components/MainPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [provider, setProvider] = useState(null)
   const [account, setAccount] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (event) => {
+    console.log('da')
+    setSearchQuery(event.target.value);
+  };
 
   const loadBlockchainData = async () => {
     // connect to blockchain
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     setProvider(provider)
   }
-
+  console.log(searchQuery)
   useEffect(() => {
     loadBlockchainData()
   }, [])
@@ -28,9 +35,10 @@ function App() {
         <BrowserRouter>
           <Nav account={account} setAccount={setAccount} />
           <Routes>
-            <Route exact path="/" element={<MainPage/>} />
+            <Route exact path="/" element={<MainPage searchQuery={searchQuery} handleSearch={handleSearch}/>} />
             <Route path="/joins" element={<NewListing account={account}/>} />
-            <Route path="/listings" element={<Listings/>} />
+            <Route path="/legacylistings" element={<LegacyListings /> } />
+            <Route path="/listings" element={<Listings searchQuery={searchQuery} handleSearch={handleSearch} /> } />
             <Route path="/listing" element={<Listing />} />
             <Route path="/listing/:listingId" element={<Listing />} />
           </Routes>

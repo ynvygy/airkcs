@@ -1,8 +1,36 @@
 import { useNavigate } from 'react-router-dom';
 import './search.css';
+import { ethers } from 'ethers';
+import { useState } from 'react';
 
-const Search = ({handleSearch}) => {
+const Search = ({searchQuery, handleSearch}) => {
   const navigate = useNavigate();
+
+  const ListingsABI = [
+    "event ListingCreated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
+    "event ListingRemoved(uint256 indexed id, uint256 timestamp)",
+    "event ListingUpdated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
+    "function createListing(string name, uint256 stars, string image, uint256 price, string location, string description)",
+    "function getLandlord(uint256 _listingId) view returns (address)",
+    "function getListing(uint256 _listingId) view returns (tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord))",
+    "function getListings() view returns (uint256[], tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)[])",
+    "function listings(uint256) view returns (string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)",
+    "function nextListingId() view returns (uint256)",
+    "function removeListing(uint256 _listingId)",
+    "function updateListing(uint256 _listingId, string _image, uint256 _price, string _location, string _description)"
+  ]
+  
+  const contractAddress = '0xe7f1725e7734ce288f8367e1bb143e90bb3f0512';
+  const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
+  const signer = provider.getSigner();
+  const listingsContract = new ethers.Contract(contractAddress, ListingsABI, signer);
+
+  const [listings, setListings] = useState([]);
+
+  const getListings = async () => {
+    const [listingIds, listings] = await listingsContract.getListings();
+    setListings(listings)
+  };
 
   return (
     <>
@@ -22,7 +50,7 @@ const Search = ({handleSearch}) => {
                     <path d="M2.75 12h18.5c.69 0 1.25.56 1.25 1.25V18l.75-.75H.75l.75.75v-4.75c0-.69.56-1.25 1.25-1.25zm0-1.5A2.75 2.75 0 0 0 0 13.25V18c0 .414.336.75.75.75h22.5A.75.75 0 0 0 24 18v-4.75a2.75 2.75 0 0 0-2.75-2.75H2.75zM0 18v3a.75.75 0 0 0 1.5 0v-3A.75.75 0 0 0 0 18zm22.5 0v3a.75.75 0 0 0 1.5 0v-3a.75.75 0 0 0-1.5 0zm-.75-6.75V4.5a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 2.25 4.5v6.75a.75.75 0 0 0 1.5 0V4.5a.75.75 0 0 1 .75-.75h15a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 0 1.5 0zm-13.25-3h7a.25.25 0 0 1 .25.25v2.75l.75-.75h-9l.75.75V8.5a.25.25 0 0 1 .25-.25zm0-1.5A1.75 1.75 0 0 0 6.75 8.5v2.75c0 .414.336.75.75.75h9a.75.75 0 0 0 .75-.75V8.5a1.75 1.75 0 0 0-1.75-1.75h-7z" fill="currentColor"/>
                   </svg>
                 </div>
-                <input type="text" style={{width: '100%', padding: '5px', borderRadius: '3px', marginRight: '5px', height: '5.7vh', border: 'none', outline: 'none', fontSize:"0.9em"}} placeholder="Where are you going?" />
+                <input type="text" style={{width: '100%', padding: '5px', borderRadius: '3px', marginRight: '5px', height: '5.7vh', border: 'none', outline: 'none', fontSize:"0.9em"}} defaultValue={searchQuery} onChange={handleSearch} placeholder="Where are you going?" />
               </div>
               <div style={{width: '29%', padding: '0px', borderRadius: '3px', marginRight: '5px', display: 'flex', whiteSpace: 'nowrap', alignItems: 'center', backgroundColor: 'white'}}>
                 <div style={{paddingLeft: '10px'}}>
@@ -43,7 +71,7 @@ const Search = ({handleSearch}) => {
                   <path d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z" fill="currentColor"/>
                 </svg>
               </div>
-              <button onClick={() => navigate('/listings')} style={{width: '10%', padding: '5px', backgroundColor: '#0071c2', color: 'white', borderRadius: '3px', height: '5.7vh', border: 'none', fontSize: "1.25em"}} onMouseOver={(e) => e.target.style.backgroundColor = '#003580'} onMouseOut={(e) => e.target.style.backgroundColor = '#0071c2'} >Search</button>
+              <button type="button" onClick={() => { if(searchQuery.trim() != '') { navigate('/listings') } } } style={{width: '10%', padding: '5px', backgroundColor: '#0071c2', color: 'white', borderRadius: '3px', height: '5.7vh', border: 'none', fontSize: "1.25em"}} onMouseOver={(e) => e.target.style.backgroundColor = '#003580'} onMouseOut={(e) => e.target.style.backgroundColor = '#0071c2'} >Search</button>
             </div>
             <label style={{ display: "flex", alignItems: "center", marginTop: "10px", fontSize: "1em" }}>
               <input type="checkbox" style={{ borderRadius: "2px", marginRight: "8px", fontSize: "0.9em" }} />

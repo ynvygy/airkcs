@@ -3,11 +3,11 @@ import Offers from './Offers';
 import Tabs from './Tabs';
 import Browse from './Browse';
 
-const MainPage = ({account}) => {
+const MainPage = ({searchQuery, handleSearch}) => {
   return (
     <>
       <Tabs />
-      <Search/>
+      <Search searchQuery={searchQuery} handleSearch={handleSearch}/>
       <Offers />
       <Browse />
     </>

@@ -9,10 +9,28 @@ import People from '../images/people.png'
 import Choices from '../images/choices.png'
 import { ethers } from 'ethers';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react'
 
 const Listing = ({account}) => {
+  const [selectedOption, setSelectedOption] = useState(0);
+
   const { listingId } = useParams();
+  const escrowAddress = '0x5fbdb2315678afecb367f032d93f642f64180aa3';
+  const escrowAbi = [
+    "function cancelReservation(uint256 _reservationId)",
+    "function completeReservation(uint256 _reservationId)",
+    "function createReservation(uint256 _listingId) payable",
+    "function getReservation(uint256 _reservationId) view returns (tuple(uint256 listingId, address user, address landlord, uint8 status, uint256 amount))",
+    "function getReservationsForListing(uint256 _listingId) view returns (tuple(uint256 listingId, address user, address landlord, uint8 status, uint256 amount)[])",
+    "function getReservationsForUser(address _userId) view returns (tuple(uint256 listingId, address user, address landlord, uint8 status, uint256 amount)[])",
+    "function listingReservations(uint256, uint256) view returns (uint256 listingId, address user, address landlord, uint8 status, uint256 amount)",
+    "function nextReservationId() view returns (uint256)",
+    "function reservations(uint256) view returns (uint256 listingId, address user, address landlord, uint8 status, uint256 amount)",
+    "function userReservations(address, uint256) view returns (uint256 listingId, address user, address landlord, uint8 status, uint256 amount)"
+  ]
   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const escrowContract = new ethers.Contract(escrowAddress, escrowAbi, provider);
+
   return (
     <>
       <div style={{backgroundColor: "#fef3ec", fontSize: "1em", fontWeight: "bold"}}>
@@ -527,11 +545,11 @@ const Listing = ({account}) => {
                     </div>
                   </td>
                   <td style={{border: '1px solid #5bbaff', width: "3%"}}>
-                    <select style={{fontSize: "0.85em", overflow: "auto", width: "90%",marginBottom: "365px", boxSizing: "border-box"}}>
-                        <option value="apple" selected>0</option>
-                        <option value="apple">1 (1.337 ETH)</option>
-                        <option value="banana">2 (2.674 ETH)</option>
-                        <option value="orange">3 (4.011 ETH)</option>
+                    <select style={{fontSize: "0.85em", overflow: "auto", width: "90%",marginBottom: "365px", boxSizing: "border-box"}} onChange={(e) => setSelectedOption(e.target.value)}>
+                        <option value="0" selected>0</option>
+                        <option value="1.337">1 (1.337 ETH)</option>
+                        <option value="2.674">2 (2.674 ETH)</option>
+                        <option value="4.011">3 (4.011 ETH)</option>
                       </select>
                   </td>
                   <button style={{ backgroundColor: "#0071c2", color: "#fff", width: '86%', fontSize: "16px", height: "35px", border: 'none', marginTop: "10px", marginBottom: "10px"}}
@@ -539,11 +557,13 @@ const Listing = ({account}) => {
                       console.log(account)
                       try {
                         const signer = provider.getSigner();
+                        const reservationValue = ethers.utils.parseEther(selectedOption);
                         const transaction = {
-                          to: '0x123...', // replace with the recipient's address
-                          value: ethers.utils.parseEther('1')
+                          to: escrowContract.address,
+                          value: reservationValue
                         };
-                        const tx = await signer.sendTransaction(transaction);
+                        const options = { value: transaction.value };
+                        const tx = await escrowContract.connect(signer).createReservation(listingId, { value: reservationValue });
                         console.log(tx);
                       } catch (error) {
                         console.error(error);

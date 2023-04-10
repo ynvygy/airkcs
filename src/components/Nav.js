@@ -22,6 +22,10 @@ const Nav = ({ account, setAccount }) => {
     }
   }
 
+  const disconnectHandler = () => {
+    setAccount(null);
+  };
+
   useEffect(() => {
     async function checkAccount() {
       if (window.ethereum) {
@@ -62,7 +66,7 @@ const Nav = ({ account, setAccount }) => {
                 <span style={{ fontSize: "1.45em", color: "#006ce4" }}>Register</span>
               </a>
               { account ? (
-                <a href="#" className="white-button" style={{ fontSize: "0.6em", textDecoration: "none", padding: "8px 10px" }}>
+                <a href="#" className="white-button" onClick={disconnectHandler} style={{ fontSize: "0.6em", textDecoration: "none", padding: "8px 10px" }}>
                   <span style={{ fontSize: "1.45em", color: "#006ce4" }}>{account.slice(0, 6) + '...' + account.slice(38,42)}</span>
                 </a>) :
                 (
