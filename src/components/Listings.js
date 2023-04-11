@@ -6,6 +6,7 @@ import { Buffer } from 'buffer';
 import { create } from 'ipfs-http-client'
 import { ethers, BigNumber } from 'ethers';
 import React, { useEffect, useState } from 'react';
+import listingsContractData from '../data/listings-contract.json';
 
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
@@ -23,24 +24,12 @@ const client = create({
   }
 })
 
-const ListingsABI = [
-  "event ListingCreated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
-  "event ListingRemoved(uint256 indexed id, uint256 timestamp)",
-  "event ListingUpdated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
-  "function createListing(string name, uint256 stars, string image, uint256 price, string location, string description)",
-  "function getLandlord(uint256 _listingId) view returns (address)",
-  "function getListing(uint256 _listingId) view returns (tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord))",
-  "function getListings() view returns (uint256[], tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)[])",
-  "function listings(uint256) view returns (string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)",
-  "function nextListingId() view returns (uint256)",
-  "function removeListing(uint256 _listingId)",
-  "function updateListing(uint256 _listingId, string _image, uint256 _price, string _location, string _description)"
-]
+const listingsAbi = listingsContractData.contract.abi;
 
 const contractAddress = '0xe7f1725e7734ce288f8367e1bb143e90bb3f0512';
 const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
 const signer = provider.getSigner();
-const listingsContract = new ethers.Contract(contractAddress, ListingsABI, signer);
+const listingsContract = new ethers.Contract(contractAddress, listingsAbi, signer);
 
 const Listings = ({searchQuery, handleSearch}) => {
   const navigate = useNavigate();

@@ -62,17 +62,19 @@ const Nav = ({ account, setAccount }) => {
                 </svg>  
               </span></div>
               <a href="#" onClick={() => navigate('/joins')} style={{ color: "#fff" }}>List your property</a>
-              <a href="#" className="white-button" style={{ fontSize: "0.6em", textDecoration: "none", padding: "8px 10px" }}>
-                <span style={{ fontSize: "1.45em", color: "#006ce4" }}>Register</span>
-              </a>
               { account ? (
                 <a href="#" className="white-button" onClick={disconnectHandler} style={{ fontSize: "0.6em", textDecoration: "none", padding: "8px 10px" }}>
                   <span style={{ fontSize: "1.45em", color: "#006ce4" }}>{account.slice(0, 6) + '...' + account.slice(38,42)}</span>
                 </a>) :
                 (
-                <a href="#" className="white-button" onClick={connectHandler} style={{ fontSize: "0.6em", textDecoration: "none", padding: "8px 10px" }}>
-                  <span style={{ fontSize: "1.45em", color: "#006ce4" }}>Sign In</span>
-                </a>
+                <>
+                  <a href="#" className="white-button" style={{ fontSize: "0.6em", textDecoration: "none", padding: "8px 10px" }}>
+                    <span style={{ fontSize: "1.45em", color: "#006ce4" }}>Register</span>
+                  </a>
+                  <a href="#" className="white-button" onClick={connectHandler} style={{ fontSize: "0.6em", textDecoration: "none", padding: "8px 10px" }}>
+                    <span style={{ fontSize: "1.45em", color: "#006ce4" }}>Sign In</span>
+                  </a>
+                </>
               )}
             </div>
           </nav>

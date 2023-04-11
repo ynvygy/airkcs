@@ -10,14 +10,24 @@ import Choices from '../images/choices.png'
 import { ethers } from 'ethers';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react'
-import escrowContractData from '../data/escrow-contract.json';
 
-const Listing = ({account}) => {
+const LegacyListing = ({account}) => {
   const [selectedOption, setSelectedOption] = useState(0);
 
   const { listingId } = useParams();
-  const escrowAddress = escrowContractData.contract.address;
-  const escrowAbi = escrowContractData.contract.abi;
+  const escrowAddress = '0x5fbdb2315678afecb367f032d93f642f64180aa3';
+  const escrowAbi = [
+    "function cancelReservation(uint256 _reservationId)",
+    "function completeReservation(uint256 _reservationId)",
+    "function createReservation(uint256 _listingId) payable",
+    "function getReservation(uint256 _reservationId) view returns (tuple(uint256 listingId, address user, address landlord, uint8 status, uint256 amount))",
+    "function getReservationsForListing(uint256 _listingId) view returns (tuple(uint256 listingId, address user, address landlord, uint8 status, uint256 amount)[])",
+    "function getReservationsForUser(address _userId) view returns (tuple(uint256 listingId, address user, address landlord, uint8 status, uint256 amount)[])",
+    "function listingReservations(uint256, uint256) view returns (uint256 listingId, address user, address landlord, uint8 status, uint256 amount)",
+    "function nextReservationId() view returns (uint256)",
+    "function reservations(uint256) view returns (uint256 listingId, address user, address landlord, uint8 status, uint256 amount)",
+    "function userReservations(address, uint256) view returns (uint256 listingId, address user, address landlord, uint8 status, uint256 amount)"
+  ]
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const escrowContract = new ethers.Contract(escrowAddress, escrowAbi, provider);
 
@@ -626,4 +636,4 @@ const Listing = ({account}) => {
   )
 }
 
-export default Listing;
+export default LegacyListing;

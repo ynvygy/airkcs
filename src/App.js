@@ -6,6 +6,7 @@ import NewListing from './components/NewListing';
 import Listings from './components/Listings';
 import Listing from './components/Listing';
 import LegacyListings from './components/LegacyListings';
+import LegacyListing from './components/LegacyListing';
 import MainPage from './components/MainPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -39,7 +40,7 @@ function App() {
             <Route path="/joins" element={<NewListing account={account}/>} />
             <Route path="/legacylistings" element={<LegacyListings /> } />
             <Route path="/listings" element={<Listings searchQuery={searchQuery} handleSearch={handleSearch} /> } />
-            <Route path="/listing" element={<Listing />} />
+            <Route path="/legacylisting" element={<LegacyListing />} />
             <Route path="/listing/:listingId" element={<Listing />} />
           </Routes>
         </BrowserRouter>

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 import "./Listings.sol";
+import "./Reservations.sol";
 
 contract Escrow {
     enum ReservationStatus {
@@ -19,6 +20,8 @@ contract Escrow {
 
     uint public nextReservationId;
 
+    //mapping(uint256 => address) reservations;
+
     //mapping(uint => Escrow) public balances;
     mapping(uint => Reservation) public reservations;
 
@@ -35,6 +38,13 @@ contract Escrow {
 
         listingReservations[_listingId].push(reservations[nextReservationId]);
         userReservations[msg.sender].push(reservations[nextReservationId]);
+
+        // temporary creation of reservation from here
+        //Reservation reservation = new Reservation(msg.sender, _listingId);
+
+        //reservation.createReservation();
+
+        //reservations[id] = address(reservation);
 
         nextReservationId++;
     }

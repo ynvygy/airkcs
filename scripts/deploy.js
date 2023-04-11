@@ -63,7 +63,7 @@ async function writeDeploymentInfo(filename, contract) {
   }
 
   const content = JSON.stringify(data, null, 2);
-  await fs.writeFile(`${filename}-contract.json`, content, { encoding: "utf-8"})
+  await fs.writeFile(`src/data/${filename}-contract.json`, content, { encoding: "utf-8"})
 }
 
 // We recommend this pattern to be able to use async/await everywhere
