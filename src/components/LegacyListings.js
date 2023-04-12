@@ -6,6 +6,8 @@ import { Buffer } from 'buffer';
 import { create } from 'ipfs-http-client'
 import { ethers, BigNumber } from 'ethers';
 import React, { useEffect, useState } from 'react';
+import HotelTwo from '../images/hotel2.jpg';
+import HotelThree from '../images/hotel3.jpg';
 
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
@@ -52,7 +54,7 @@ const LegacyListings = ({searchQuery, handleSearch}) => {
         <span> &gt; </span>
         <span style={{ color: '#0071c2' }}>United States of America</span>
         <span> &gt; </span>
-        <span style={{ color: '#0071c2' }}>New York</span>
+        <span style={{ color: '#0071c2' }}>Inflation</span>
         <span> &gt; </span>
         <span style={{ color: 'grey' }}>Search results</span>
       </div>
@@ -253,7 +255,7 @@ const LegacyListings = ({searchQuery, handleSearch}) => {
                 <br/>
                 <p style={{color: "#0071c2", fontSize: "0.8em", marginRight: "10px", display: 'inline-block', fontWeight: "bold", textDecoration: "underline" }}>Inflation City Center, Inflation</p><p style={{color: "#0071c2", fontSize: "0.8em", display: 'inline-block', marginRight: "10px", fontWeight: "bold", textDecoration: "underline" }}>Show on map</p><p style={{fontSize: "0.8em", display: 'inline-block'}}>100 m from center</p>
                 <div style={{borderLeft: "2px solid #e2e2e2", paddingLeft: "10px", marginTop: "10px", marginLeft: "10px"}}>
-                  <p style={{fontSize: "0.8em", fontWeight: "bold", margin: "0px"}}>Economy Double Room</p>
+                  <p style={{fontSize: "0.8em", fontWeight: "bold", margin: "0px"}}>Premium Design Triple Room</p>
                   <p style={{fontSize: "0.8em", margin: "0px"}}>1 full bed</p>
                   <p style={{fontSize: "0.8em",color: "#108940", fontWeight: "bold", margin: "0px"}}>Free cancellation</p>
                   <p style={{fontSize: "0.8em",color: "#108940", margin: "0px"}}>You can cancel later, so lock in this great price today!</p>
@@ -275,7 +277,7 @@ const LegacyListings = ({searchQuery, handleSearch}) => {
               
               <div style={{textAlign: "right"}}>
                 <p style={{marginBottom: "0px", fontSize: "0.8em"}}>1 week, 2 adults</p>
-                <p style={{marginBottom: "0px"}}>1.337 ETH</p>
+                <p style={{marginBottom: "0px"}}>1 ETH</p>
                 <p style={{marginBottom: "0px", fontSize: "0.8em"}}>includes taxes and fees</p>
                 <div className="input-group" style={{alignItems: 'right', justifyContent: 'right', marginTop: "10px", marginBottom: "10px"}}>
                   <button style={{ backgroundColor: "#0071c2", color: "#fff", width: '86%', fontSize: "16px", height: "40px", borderRadius: '5px', border: 'none'}}>
@@ -295,7 +297,7 @@ const LegacyListings = ({searchQuery, handleSearch}) => {
           </div>
           <div className="row" style={{border: "1px solid #c6c6c6", borderRadius: "7px", marginBottom: '15px'}}>
             <div className="col-md-3" style={{width: "28%"}}>
-              <div className="for-image" style={{backgroundImage: `url(${HotelOne})`, height: "190px", margin: "10px", borderRadius: "5px"}}>
+              <div className="for-image" style={{backgroundImage: `url(${HotelTwo})`, height: "190px", margin: "10px", borderRadius: "5px"}}>
                 <svg width="24" height="24" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ paddingRight: '10px', width: '35px', fill: "none", stroke: "white", strokeWidth: "10px", marginLeft: "160px", marginTop: "5px" }}>
                   <path d="M64 112a3.6 3.6 0 0 1-2-.5 138.8 138.8 0 0 1-44.2-38c-10-14.4-10.6-26-9.4-33.2a29 29 0 0 1 22.9-23.7c11.9-2.4 24 2.5 32.7 13a33.7 33.7 0 0 1 32.7-13 29 29 0 0 1 22.8 23.7c1.3 7.2.6 18.8-9.3 33.3-9.1 13.1-24 25.9-44.2 37.9a3.6 3.6 0 0 1-2 .5z"/>
                 </svg>
@@ -323,7 +325,7 @@ const LegacyListings = ({searchQuery, handleSearch}) => {
                   <path d="M112 8H16a8 8 0 0 0-8 8v96a8 8 0 0 0 8 8h96a8 8 0 0 0 8-8V16a8 8 0 0 0-8-8zM48 96H24V58h24zm56-25a8.7 8.7 0 0 1-2 6 8.9 8.9 0 0 1 1 4 6.9 6.9 0 0 1-5 7c-.5 4-4.8 8-9 8H56V58l10.3-23.3a5.4 5.4 0 0 1 10.1 2.7 10.3 10.3 0 0 1-.6 2.7L72 52h23c4.5 0 9 3.5 9 8a9.2 9.2 0 0 1-2 5.3 7.5 7.5 0 0 1 2 5.7z" fill="#ffb700"/>
                 </svg>
                 <br/>
-                <p style={{color: "#0071c2", fontSize: "0.8em", marginRight: "10px", display: 'inline-block', fontWeight: "bold", textDecoration: "underline" }}>Inflation City Center, Inflation</p><p style={{color: "#0071c2", fontSize: "0.8em", display: 'inline-block', marginRight: "10px", fontWeight: "bold", textDecoration: "underline" }}>Show on map</p><p style={{fontSize: "0.8em", display: 'inline-block'}}>100 m from center</p>
+                <p style={{color: "#0071c2", fontSize: "0.8em", marginRight: "10px", display: 'inline-block', fontWeight: "bold", textDecoration: "underline" }}>Hike Rise, Wakanda</p><p style={{color: "#0071c2", fontSize: "0.8em", display: 'inline-block', marginRight: "10px", fontWeight: "bold", textDecoration: "underline" }}>Show on map</p><p style={{fontSize: "0.8em", display: 'inline-block'}}>450 m from center</p>
                 <div style={{borderLeft: "2px solid #e2e2e2", paddingLeft: "10px", marginTop: "10px", marginLeft: "10px"}}>
                   <p style={{fontSize: "0.8em", fontWeight: "bold", margin: "0px"}}>Economy Double Room</p>
                   <p style={{fontSize: "0.8em", margin: "0px"}}>1 full bed</p>
@@ -337,17 +339,17 @@ const LegacyListings = ({searchQuery, handleSearch}) => {
               <div className="row">
                 <div style={{width: "75%", paddingTop: "15px"}}>
                   <p style={{fontSize: "1em", marginBottom: "0px", textAlign: "right" }}>Excellent</p>
-                  <p style={{fontSize: "0.8em", textAlign: "right", marginBottom: "0px"}}>1,337 reviews</p>
+                  <p style={{fontSize: "0.8em", textAlign: "right", marginBottom: "0px"}}>2,506 reviews</p>
                 </div>
                 <div col-md-1 style={{width: "20%", backgroundColor: "#003b95", margin: "1px", borderRadius: "7px 7px 7px 0", marginTop: "18px", paddingLeft: "7px", paddingTop: "5px"}}>
-                  <p style={{color: 'white', marginBottom: "10px"}}>9.9</p>
+                  <p style={{color: 'white', marginBottom: "10px"}}>9.7</p>
                 </div>
-                <p style={{color: "#0071c2", fontWeight: "bold", textAlign: "right", fontSize: "0.9em"}}>Comfort 9.9</p>
+                <p style={{color: "#0071c2", fontWeight: "bold", textAlign: "right", fontSize: "0.9em"}}>Comfort 9.7</p>
               </div>
               
               <div style={{textAlign: "right"}}>
                 <p style={{marginBottom: "0px", fontSize: "0.8em"}}>1 week, 2 adults</p>
-                <p style={{marginBottom: "0px"}}>1.337 ETH</p>
+                <p style={{marginBottom: "0px"}}>1 ETH</p>
                 <p style={{marginBottom: "0px", fontSize: "0.8em"}}>includes taxes and fees</p>
                 <div className="input-group" style={{alignItems: 'right', justifyContent: 'right', marginTop: "10px", marginBottom: "10px"}}>
                   <button style={{ backgroundColor: "#0071c2", color: "#fff", width: '86%', fontSize: "16px", height: "40px", borderRadius: '5px', border: 'none'}}>
@@ -360,7 +362,7 @@ const LegacyListings = ({searchQuery, handleSearch}) => {
 
           <div className="row" style={{border: "1px solid #c6c6c6", borderRadius: "7px", marginBottom: '15px'}}>
             <div className="col-md-3" style={{width: "28%"}}>
-              <div className="for-image" style={{backgroundImage: `url(${HotelOne})`, height: "190px", margin: "10px", borderRadius: "5px"}}>
+              <div className="for-image" style={{backgroundImage: `url(${HotelThree})`, height: "190px", margin: "10px", borderRadius: "5px"}}>
                 <svg width="24" height="24" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ paddingRight: '10px', width: '35px', fill: "none", stroke: "white", strokeWidth: "10px", marginLeft: "160px", marginTop: "5px" }}>
                   <path d="M64 112a3.6 3.6 0 0 1-2-.5 138.8 138.8 0 0 1-44.2-38c-10-14.4-10.6-26-9.4-33.2a29 29 0 0 1 22.9-23.7c11.9-2.4 24 2.5 32.7 13a33.7 33.7 0 0 1 32.7-13 29 29 0 0 1 22.8 23.7c1.3 7.2.6 18.8-9.3 33.3-9.1 13.1-24 25.9-44.2 37.9a3.6 3.6 0 0 1-2 .5z"/>
                 </svg>
@@ -405,14 +407,14 @@ const LegacyListings = ({searchQuery, handleSearch}) => {
                   <p style={{fontSize: "0.8em", textAlign: "right", marginBottom: "0px"}}>1,337 reviews</p>
                 </div>
                 <div col-md-1 style={{width: "20%", backgroundColor: "#003b95", margin: "1px", borderRadius: "7px 7px 7px 0", marginTop: "18px", paddingLeft: "7px", paddingTop: "5px"}}>
-                  <p style={{color: 'white', marginBottom: "10px"}}>9.9</p>
+                  <p style={{color: 'white', marginBottom: "10px"}}>9.6</p>
                 </div>
-                <p style={{color: "#0071c2", fontWeight: "bold", textAlign: "right", fontSize: "0.9em"}}>Comfort 9.9</p>
+                <p style={{color: "#0071c2", fontWeight: "bold", textAlign: "right", fontSize: "0.9em"}}>Comfort 9.5</p>
               </div>
               
               <div style={{textAlign: "right"}}>
                 <p style={{marginBottom: "0px", fontSize: "0.8em"}}>1 week, 2 adults</p>
-                <p style={{marginBottom: "0px"}}>1.337 ETH</p>
+                <p style={{marginBottom: "0px"}}>1 ETH</p>
                 <p style={{marginBottom: "0px", fontSize: "0.8em"}}>includes taxes and fees</p>
                 <div className="input-group" style={{alignItems: 'right', justifyContent: 'right', marginTop: "10px", marginBottom: "10px"}}>
                   <button style={{ backgroundColor: "#0071c2", color: "#fff", width: '86%', fontSize: "16px", height: "40px", borderRadius: '5px', border: 'none'}}>

@@ -44,18 +44,18 @@ contract Reservations {
         );
 
         // Create a new reservation
-        uint reservationId = reservationIdCounter;
-        Reservation memory newReservation = Reservation(
-            reservationId,
-            listingId,
-            msg.sender,
-            checkInDate,
-            checkOutDate
-        );
-        reservations.push(newReservation);
+        //uint reservationId = reservationIdCounter;
+        //Reservation memory newReservation = Reservation(
+        //   reservationId,
+        //    listingId,
+        //    msg.sender,
+        //    checkInDate,
+        //    checkOutDate
+        //);
+        //reservations.push(newReservation);
 
         // Increment the reservation ID counter
-        reservationIdCounter++;
+        //reservationIdCounter++;
     }
 
     function getReservation(

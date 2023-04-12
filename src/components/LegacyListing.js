@@ -10,6 +10,13 @@ import Choices from '../images/choices.png'
 import { ethers } from 'ethers';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react'
+import HotelPhoto1 from '../images/hotel21.jpg';
+import HotelPhoto2 from '../images/hotel22.jpg';
+import HotelPhoto3 from '../images/hotel23.jpg';
+import HotelPhoto4 from '../images/hotel24.jpg';
+import HotelPhoto5 from '../images/hotel25.jpg';
+import HotelPhoto6 from '../images/hotel26.jpg';
+import HotelPhoto7 from '../images/hotel27.jpg';
 
 const LegacyListing = ({account}) => {
   const [selectedOption, setSelectedOption] = useState(0);
@@ -209,7 +216,7 @@ const LegacyListing = ({account}) => {
                 <div style={{textAlign: "left"}}>
                   <h4><strong>Hotel Poje</strong></h4>
                   <svg style={{fill: "#0071c2"}} width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
-                  <p style={{fontSize: "0.93em", letterSpacing: "-0.3px", display: 'inline-block'}}>1 Inflated Avenue, 8055 Inflation, United States of America -</p><p style={{fontSize: "0.9em", letterSpacing: "-0.3px", display: 'inline-block', color: "#0071c2", fontWeight: "bold", marginLeft: "2px"}}> Great location - show map</p>
+                  <p style={{fontSize: "0.93em", letterSpacing: "-0.3px", display: 'inline-block'}}>1 Interest Avenue, 8055 Inflation, United States of America -</p><p style={{fontSize: "0.9em", letterSpacing: "-0.3px", display: 'inline-block', color: "#0071c2", fontWeight: "bold", marginLeft: "2px"}}> Great location - show map</p>
                  </div>
               </div>
               <div className="reserve-map" style={{width: "30%"}}>
@@ -244,11 +251,11 @@ const LegacyListing = ({account}) => {
               <div className="leftphotos" style={{width: "28%"}}>
                 <div className="for-image" style={{backgroundImage: `url(${HotelOne})`, height: "166px", marginTop: "7px", borderRadius: "5px", backgroundSize: "cover", paddingLeft: "0px"}}>
                 </div>
-                <div className="for-image" style={{backgroundImage: `url(${HotelOne})`, height: "166px", marginTop: "7px", borderRadius: "5px", backgroundSize: "cover", paddingLeft: "0px"}}>
+                <div className="for-image" style={{backgroundImage: `url(${HotelPhoto1})`, height: "166px", marginTop: "7px", borderRadius: "5px", backgroundSize: "cover", paddingLeft: "0px"}}>
                 </div>
               </div>
               <div className="rightphotos" style={{width: "72%", paddingLeft: "0px", paddingRight: "55px"}}>
-                <div className="for-image" style={{backgroundImage: `url(${HotelOne})`, height: "340px", marginTop: "7px", borderRadius: "5px", backgroundSize: "cover"}}>
+                <div className="for-image" style={{backgroundImage: `url(${HotelPhoto5})`, height: "340px", marginTop: "7px", borderRadius: "5px", backgroundSize: "cover"}}>
                   <div className="row">
                     <div className="col-md-5" style={{marginTop: "10px", marginLeft: "325px"}}>
                       <div style={{backgroundColor: 'white', borderRadius: "3px"}}>
@@ -337,7 +344,7 @@ const LegacyListing = ({account}) => {
                   borderRadius: "8px",
                   padding: "0px",
                   width: "19%",
-                  backgroundImage: `url(${HotelOne})`, 
+                  backgroundImage: `url(${HotelPhoto2})`, 
                   backgroundSize: 'cover',
                   height: "110px"
                 }}>
@@ -347,7 +354,7 @@ const LegacyListing = ({account}) => {
                   borderRadius: "8px",
                   padding: "0px",
                   width: "19%",
-                  backgroundImage: `url(${HotelOne})`, 
+                  backgroundImage: `url(${HotelPhoto3})`, 
                   backgroundSize: 'cover',
                   height: "110px"
                 }}>
@@ -357,7 +364,7 @@ const LegacyListing = ({account}) => {
                   borderRadius: "8px",
                   padding: "0px",
                   width: "19%",
-                  backgroundImage: `url(${HotelOne})`, 
+                  backgroundImage: `url(${HotelPhoto4})`, 
                   backgroundSize: 'cover',
                   height: "110px"
                 }}>
@@ -367,7 +374,7 @@ const LegacyListing = ({account}) => {
                   borderRadius: "8px",
                   padding: "0px",
                   width: "19%",
-                  backgroundImage: `url(${HotelOne})`, 
+                  backgroundImage: `url(${HotelPhoto6})`, 
                   backgroundSize: 'cover',
                   height: "110px"
                 }}>
@@ -377,9 +384,9 @@ const LegacyListing = ({account}) => {
                   borderRadius: "8px",
                   padding: "0px",
                   width: "19%",
-                  backgroundImage: `url(${HotelOne})`, 
+                  backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${HotelPhoto7})`, 
                   backgroundSize: 'cover',
-                  height: "110px"
+                  height: "110px",
                 }}><strong><p style={{color: "white", paddingTop: "35px"}}>+45 photos</p></strong>
                 </div>
               </div>
@@ -530,7 +537,7 @@ const LegacyListing = ({account}) => {
                     </div>
                   </td>
                   <td style={{border: '1px solid #5bbaff', paddingLeft:"6px"}}>
-                    <strong><p style={{marginBottom: "0px", fontSize: "0.98em", textAlign: "left"}}>1,337 ETH</p></strong>
+                    <strong><p style={{marginBottom: "0px", fontSize: "0.98em", textAlign: "left"}}>1 ETH</p></strong>
                     <p style={{marginBottom: "347px", textAlign: "left", fontSize: "0.8em"}}>Includes taxes and fees</p>
                   </td>
                   <td style={{border: '1px solid #5bbaff'}}>
@@ -547,9 +554,9 @@ const LegacyListing = ({account}) => {
                   <td style={{border: '1px solid #5bbaff', width: "3%"}}>
                     <select style={{fontSize: "0.85em", overflow: "auto", width: "90%",marginBottom: "365px", boxSizing: "border-box"}} onChange={(e) => setSelectedOption(e.target.value)}>
                         <option value="0" selected>0</option>
-                        <option value="1.337">1 (1.337 ETH)</option>
-                        <option value="2.674">2 (2.674 ETH)</option>
-                        <option value="4.011">3 (4.011 ETH)</option>
+                        <option value="1">1 (1 ETH)</option>
+                        <option value="2">2 (2 ETH)</option>
+                        <option value="4">3 (3 ETH)</option>
                       </select>
                   </td>
                   <button style={{ backgroundColor: "#0071c2", color: "#fff", width: '86%', fontSize: "16px", height: "35px", border: 'none', marginTop: "10px", marginBottom: "10px"}}
@@ -557,11 +564,15 @@ const LegacyListing = ({account}) => {
                       console.log(account)
                       try {
                         const signer = provider.getSigner();
-                        const reservationValue = ethers.utils.parseEther(selectedOption);
+                        const reservationValue = ethers.utils.parseEther('1');
+                        console.log(reservationValue.toString());
                         const transaction = {
                           to: escrowContract.address,
                           value: reservationValue
                         };
+                        const balance = await provider.getBalance(signer.getAddress());
+                        console.log(ethers.utils.formatEther(balance));
+
                         const options = { value: transaction.value };
                         const tx = await escrowContract.connect(signer).createReservation(listingId, { value: reservationValue });
                         console.log(tx);
@@ -604,7 +615,7 @@ const LegacyListing = ({account}) => {
                     </div>
                   </td>
                   <td style={{border: '1px solid #5bbaff', paddingLeft:"6px", borderTop: "2px solid #5bbaff"}}>
-                    <strong><p style={{marginBottom: "0px", fontSize: "0.98em", textAlign: "left"}}>1,337 ETH</p></strong>
+                    <strong><p style={{marginBottom: "0px", fontSize: "0.98em", textAlign: "left"}}>2 ETH</p></strong>
                     <p style={{marginBottom: "347px", textAlign: "left", fontSize: "0.8em"}}>Includes taxes and fees</p>
                   </td>
                   <td style={{border: '1px solid #5bbaff', borderTop: "2px solid #5bbaff"}}>
