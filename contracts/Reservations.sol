@@ -26,7 +26,8 @@ contract Reservations {
     function createReservation(
         uint listingId,
         uint checkInDate,
-        uint checkOutDate
+        uint checkOutDate,
+        uint amount
     ) public {
         require(
             checkInDate > block.timestamp,

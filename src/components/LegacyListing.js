@@ -574,7 +574,7 @@ const LegacyListing = ({account}) => {
                         console.log(ethers.utils.formatEther(balance));
 
                         const options = { value: transaction.value };
-                        const tx = await escrowContract.connect(signer).createReservation(listingId, { value: reservationValue });
+                        const tx = await escrowContract.connect(signer).createReservation(0, { value: reservationValue });
                         console.log(tx);
                       } catch (error) {
                         console.error(error);
