@@ -46,11 +46,15 @@ async function main() {
     "Bali, Indonesia",
     "This luxurious villa offers breathtaking views of the ocean."
   );
-  console.log(await listingsContract.getListings())
   console.log("Seed listings created.");
+
+  const Reservations = await hre.ethers.getContractFactory("Reservations");
+  const reservationsContract = await Reservations.deploy();
+  await reservationsContract.deployed()
 
   await writeDeploymentInfo("escrow", escrowContract)
   await writeDeploymentInfo("listings" ,listingsContract)
+  await writeDeploymentInfo("reservations", reservationsContract)
 }
 
 async function writeDeploymentInfo(filename, contract) {

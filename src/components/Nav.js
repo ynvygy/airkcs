@@ -59,9 +59,12 @@ const Nav = ({ account, setAccount }) => {
               <span style={{ paddingRight: "25px" }}>Help</span>
               <a href="#" onClick={() => navigate('/joins')} style={{ color: "#fff" }}>List your property</a>
               { account ? (
-                <a href="#" className="white-button" onClick={disconnectHandler} style={{ fontSize: "0.6em", textDecoration: "none", padding: "8px 10px" }}>
-                  <span style={{ fontSize: "1.45em", color: "#006ce4" }}>{account.slice(0, 6) + '...' + account.slice(38,42)}</span>
-                </a>) :
+                <>
+                  <a href="#" onClick={() => navigate('/myreservations')} style={{ color: "#fff" }}>Your reservations</a>
+                  <a href="#" className="white-button" onClick={disconnectHandler} style={{ fontSize: "0.6em", textDecoration: "none", padding: "8px 10px" }}>
+                    <span style={{ fontSize: "1.45em", color: "#006ce4" }}>{account.slice(0, 6) + '...' + account.slice(38,42)}</span>
+                  </a>
+                </>) :
                 (
                 <>
                   <a href="#" className="white-button" onClick={connectHandler} style={{ fontSize: "0.6em", textDecoration: "none", padding: "8px 10px" }}>

@@ -32,8 +32,9 @@ const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
 const signer = provider.getSigner();
 const listingsContract = new ethers.Contract(contractAddress, listingsAbi, signer);
 
-const Listings = ({searchQuery, handleSearch}) => {
+const Listings = ({searchQuery, setSearchQuery, handleSearch}) => {
   const navigate = useNavigate();
+
   const [listings, setListings] = useState([]);
   const [listingIds, setListingIds] = useState([]);
 
@@ -48,12 +49,12 @@ const Listings = ({searchQuery, handleSearch}) => {
   }, []);
 
   const filteredListings = listings.filter((listing) =>
-    listing.location.toLowerCase().includes(searchQuery.toLowerCase())
+    listing.location.toLowerCase().includes(searchQuery.location.toLowerCase())
   );
 
   return (
     <div>
-      <Search searchQuery={searchQuery} handleSearch={handleSearch}/>
+      <Search searchQuery={searchQuery} handleSearch={handleSearch} setSearchQuery={setSearchQuery}/>
       <div className='col-md-8 offset-md-2 mx-auto' style={{ marginTop: '10px', fontSize: '0.8em', textAlign: 'left', width: "92%", marginLeft: "83px" }}>
         <span style={{ color: '#0071c2' }}>United States of America</span>
         <span> &gt; </span>

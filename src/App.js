@@ -9,15 +9,22 @@ import LegacyListings from './components/LegacyListings';
 import LegacyListing from './components/LegacyListing';
 import MainPage from './components/MainPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Reservations from './components/Reservations';
 
 function App() {
   const [provider, setProvider] = useState(null)
   const [account, setAccount] = useState(null)
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState({
+    location: '',
+    startDate: null,
+    endDate: null,
+    guests: 2,
+  });
+  
 
   const handleSearch = (event) => {
-    console.log('da')
-    setSearchQuery(event.target.value);
+    const { name, value } = event.target;
+    setSearchQuery({ ...searchQuery, [name]: value });
   };
 
   const loadBlockchainData = async () => {
@@ -36,12 +43,13 @@ function App() {
         <BrowserRouter>
           <Nav account={account} setAccount={setAccount} />
           <Routes>
-            <Route exact path="/" element={<MainPage searchQuery={searchQuery} handleSearch={handleSearch}/>} />
+            <Route exact path="/" element={<MainPage searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch}/>} />
             <Route path="/joins" element={<NewListing account={account}/>} />
             <Route path="/legacylistings" element={<LegacyListings /> } />
-            <Route path="/listings" element={<Listings searchQuery={searchQuery} handleSearch={handleSearch} /> } />
+            <Route path="/listings" element={<Listings searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} /> } />
             <Route path="/legacylisting" element={<LegacyListing />} />
-            <Route path="/listing/:listingId" element={<Listing />} />
+            <Route path="/listing/:listingId" element={<Listing searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} />} />
+            <Route path="/myreservations" element={<Reservations />} />
           </Routes>
         </BrowserRouter>
       </div>

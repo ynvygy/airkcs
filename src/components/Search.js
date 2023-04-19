@@ -5,18 +5,15 @@ import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const Search = ({searchQuery, handleSearch}) => {
+const Search = ({searchQuery, setSearchQuery, handleSearch}) => {
   const navigate = useNavigate();
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [guests, setGuests] = useState(2);
   const minDate = new Date();
 
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowUp') {
-      setGuests(guests + 1);
-    } else if (e.key === 'ArrowDown' && guests > 1) {
-      setGuests(guests - 1);
+      setSearchQuery({...searchQuery, guests: (searchQuery.guests + 1)});
+    } else if (e.key === 'ArrowDown' && searchQuery.guests > 1) {
+      setSearchQuery({...searchQuery, guests: (searchQuery.guests - 1)});
     }
   };
 
@@ -59,26 +56,25 @@ const Search = ({searchQuery, handleSearch}) => {
           <form className="form-inline">
             <div style={{backgroundColor: '#3498DB', borderRadius: '2px', display: 'flex', alignItems: 'center', padding: '5px', height: '4vh'}}>
               <div style={{width: '26%', borderRadius: '3px', marginRight: '5px', display: 'flex', whiteSpace: 'nowrap', alignItems: 'center', backgroundColor: 'white'}}>
-                <input type="text" style={{width: '100%', padding: '5px', borderRadius: '3px', marginRight: '5px', height: '3vh', border: 'none', outline: 'none', fontSize:"0.9em"}} defaultValue={searchQuery} onChange={handleSearch} placeholder="Where are you going?" />
+                <input type="text" style={{width: '100%', padding: '5px', borderRadius: '3px', marginRight: '5px', height: '3vh', border: 'none', outline: 'none', fontSize:"0.9em"}} defaultValue={searchQuery.location} onChange={(e) => setSearchQuery({...searchQuery, location: e.target.value})} placeholder="Where are you going?" />
               </div>
               <div style={{width: '49%', padding: '0px', borderRadius: '3px', marginRight: '5px', display: 'flex', whiteSpace: 'nowrap', alignItems: 'center', backgroundColor: 'white'}}>
                 <DatePicker
-                  selected={startDate}
-                  onChange={date => setStartDate(date)}
+                  selected={searchQuery.startDate}
+                  onChange={date => setSearchQuery({...searchQuery, startDate: date})}
                   selectsStart
-                  startDate={startDate}
-                  endDate={endDate}
+                  startDate={searchQuery.startDate}
+                  endDate={searchQuery.endDate}
                   placeholderText="Check-in Date"
                   minDate={minDate}
                   style={{width: '50%'}}
                 />
                 <DatePicker
-                  selected={endDate}
-                  onChange={date => setEndDate(date)}
+                  selected={searchQuery.endDate}
+                  onChange={date => setSearchQuery({...searchQuery, endDate: date})}
                   selectsEnd
-                  startDate={startDate}
-                  endDate={endDate}
-                  minDate={startDate}
+                  startDate={searchQuery.startDate}
+                  endDate={searchQuery.endDate}
                   placeholderText="Check-out Date"
                   minDate={minDate}
                   style={{width: '50%'}}
@@ -89,10 +85,10 @@ const Search = ({searchQuery, handleSearch}) => {
                   Guests
                 </div>
                 <div style={{ position: 'relative', width: '100px' }}>
-                  <input type="number" value={guests} onChange={(e) => setGuests(e.target.value)} onKeyDown={handleKeyDown} style={{ width: '100%', textAlign: 'center', border: 'none', outline: 'none', fontWeight: 'bold' }} placeholder="Guests" />
+                  <input type="number" value={searchQuery.guests} onChange={(e) => setSearchQuery({...searchQuery, guests: e.target.value})} onKeyDown={handleKeyDown} style={{ width: '100%', textAlign: 'center', border: 'none', outline: 'none', fontWeight: 'bold' }} placeholder="Guests" />
                 </div>
               </div>
-              <button type="button" onClick={() => { if(searchQuery.trim() != '') { navigate('/listings') } } } style={{width: '10%', padding: '5px', backgroundColor: '#0071c2', color: 'white', borderRadius: '3px', height: '3.4vh', border: 'none', fontSize: "1em"}} onMouseOver={(e) => e.target.style.backgroundColor = '#003580'} onMouseOut={(e) => e.target.style.backgroundColor = '#0071c2'} >Search</button>
+              <button type="button" onClick={() => { navigate('/listings') } } style={{width: '10%', padding: '5px', backgroundColor: '#0071c2', color: 'white', borderRadius: '3px', height: '3.4vh', border: 'none', fontSize: "1em"}} onMouseOver={(e) => e.target.style.backgroundColor = '#003580'} onMouseOut={(e) => e.target.style.backgroundColor = '#0071c2'} >Search</button>
             </div>
           </form>
         </div>

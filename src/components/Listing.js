@@ -11,18 +11,41 @@ import { ethers } from 'ethers';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react'
 import escrowContractData from '../data/escrow-contract.json';
+import reservationsContractData from '../data/reservations-contract.json';
+import Search from './Search';
 
-const Listing = ({account}) => {
+const Listing = ({account, searchQuery, handleSearch}) => {
   const [selectedOption, setSelectedOption] = useState(0);
 
   const { listingId } = useParams();
   const escrowAddress = escrowContractData.contract.address;
   const escrowAbi = escrowContractData.contract.abi;
+  const reservationsAddress = reservationsContractData.contract.address;
+  const reservationsAbi = reservationsContractData.contract.abi;
+
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const escrowContract = new ethers.Contract(escrowAddress, escrowAbi, provider);
+  const reservationsContract = new ethers.Contract(reservationsAddress, reservationsAbi, provider);
+
+  //async function handleCreateReservationAndPay() {
+  //  try {
+      // First calling the Reservations contract to create the reservation
+  //    const reservationTx = await escrowContract.connect(signer).createReservation(listingId);
+  //    const reservationReceipt = await reservationTx.wait();
+  
+      // Secondly calling the escrow to hold the funds
+  //    const paymentTx = await escrowContract.connect(signer).payForReservation(listingId, value: {reservationValue });
+  //    const paymentReceipt = await paymentTx.wait();
+  
+  //   console.log('Reservation and payment successful!');
+  //  } catch (error) {
+  //    console.error(error);
+  //  }
+  //}
 
   return (
     <>
+      <Search searchQuery={searchQuery} handleSearch={handleSearch}/>
       <div className='col-md-8 offset-md-2 mx-auto'>
         <div style={{ marginTop: '20px', fontSize: '0.8em', textAlign: 'left', width: "92%", marginLeft: "83px" }}>
           <div className="row">
@@ -317,11 +340,12 @@ const Listing = ({account}) => {
                         const signer = provider.getSigner();
                         const reservationValue = ethers.utils.parseEther(selectedOption);
                         const transaction = {
-                          to: escrowContract.address,
+                          to: reservationsContract.address,
                           value: reservationValue
                         };
                         const options = { value: transaction.value };
-                        const tx = await escrowContract.connect(signer).createReservation(listingId, { value: reservationValue });
+                        //const tx = await reservationsContract.connect(signer).createReservation(listingId, 1, 2, 3, { value: reservationValue });
+                        const tx = await reservationsContract.connect(signer).createReservation(listingId, 1, 2, reservationValue, { gasLimit: 1000000 });
                         console.log(tx);
                       } catch (error) {
                         console.error(error);

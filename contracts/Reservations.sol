@@ -23,40 +23,42 @@ contract Reservations {
 
     Reservation[] public reservations;
 
+    modifier futureCheckinDate(uint _checkInDate) {
+        require(
+            _checkInDate > block.timestamp,
+            "Check-in date must be in the future"
+        );
+        _;
+    }
+
+    modifier checkDatesOrder(uint _checkInDate, uint _checkOutDate) {
+        require(
+            _checkOutDate > _checkInDate,
+            "Check-out date must be after check-in date"
+        );
+        _;
+    }
+
     function createReservation(
         uint listingId,
         uint checkInDate,
         uint checkOutDate,
         uint amount
     ) public {
-        require(
-            checkInDate > block.timestamp,
-            "Check-in date must be in the future"
-        );
-        require(
-            checkOutDate > checkInDate,
-            "Check-out date must be after check-in date"
-        );
-
-        // Check if the listing is available during the requested dates
-        require(
-            isListingAvailable(listingId, checkInDate, checkOutDate),
-            "Listing is not available for the requested dates"
-        );
-
         // Create a new reservation
-        //uint reservationId = reservationIdCounter;
-        //Reservation memory newReservation = Reservation(
-        //   reservationId,
-        //    listingId,
-        //    msg.sender,
-        //    checkInDate,
-        //    checkOutDate
-        //);
-        //reservations.push(newReservation);
+        uint reservationId = reservationIdCounter;
+        Reservation memory newReservation = Reservation(
+            reservationId,
+            listingId,
+            msg.sender,
+            ReservationStatus.Created,
+            amount,
+            checkInDate,
+            checkOutDate
+        );
+        reservations.push(newReservation);
 
-        // Increment the reservation ID counter
-        //reservationIdCounter++;
+        reservationIdCounter++;
     }
 
     function getReservation(
@@ -67,6 +69,10 @@ contract Reservations {
             "Reservation does not exist"
         );
         return reservations[reservationId];
+    }
+
+    function getAllReservations() public view returns (Reservation[] memory) {
+        return reservations;
     }
 
     function isListingAvailable(
