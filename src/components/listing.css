@@ -1,0 +1,25 @@
+#listing-title {
+  text-align: left
+}
+
+#hotel-photo {
+  background-image: url(../images/hotel1.jpeg);
+  background-size: cover;
+  height: 300px
+}
+
+#reserve-text {
+  margin-top: 4px;
+  font-size: 0.9em
+}
+
+#reserve-button {
+  background-color: #0071c2;
+  color: #fff;
+  width: 86%;
+  font-size: 16px;
+  height: 35px;
+  border: 'none';
+  margin-top: 10px;
+  margin-bottom: 10px
+}

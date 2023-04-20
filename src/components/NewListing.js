@@ -102,7 +102,7 @@ const NewListing = ({account}) => {
         <Form.Control type="text" name="uri" placeholder="IPS URI" value={uri} onChange={(e) => setUri(e.target.value)}/>
       </Form.Group>
       <Form.Group className="m-2">
-        <label htmlFor="price">Price</label>
+        <label htmlFor="price">Price per night</label>
         <Form.Control type="number" name="price" value={price} onChange={(e) => setPrice(e.target.value)}/>
       </Form.Group>
       <Form.Group className="m-2">

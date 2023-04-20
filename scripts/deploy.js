@@ -49,6 +49,7 @@ async function main() {
   console.log("Seed listings created.");
 
   const Reservations = await hre.ethers.getContractFactory("Reservations");
+  //const reservationsContract = await Reservations.deploy(escrowContract.address);
   const reservationsContract = await Reservations.deploy();
   await reservationsContract.deployed()
 

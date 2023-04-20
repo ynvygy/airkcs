@@ -1,16 +1,11 @@
 import './listings.css';
-import MyMap from '../images/map.png';
-import HotelOne from '../images/hotel1.jpeg';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Buffer } from 'buffer';
 import { create } from 'ipfs-http-client'
-import { ethers, BigNumber } from 'ethers';
+import { ethers } from 'ethers';
 import React, { useEffect, useState } from 'react';
 import listingsContractData from '../data/listings-contract.json';
 import Search from './Search';
-
-import { Button } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
 
 const projectId = process.env.REACT_APP_INFURA_API_KEY
 const projectSecret = process.env.REACT_APP_INFURA_API_SECRET
@@ -26,8 +21,7 @@ const client = create({
 })
 
 const listingsAbi = listingsContractData.contract.abi;
-
-const contractAddress = '0xe7f1725e7734ce288f8367e1bb143e90bb3f0512';
+const contractAddress = listingsContractData.contract.address;
 const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
 const signer = provider.getSigner();
 const listingsContract = new ethers.Contract(contractAddress, listingsAbi, signer);

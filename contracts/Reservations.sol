@@ -1,9 +1,17 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 import "./Listings.sol";
+import "./Escrow.sol";
 
 contract Reservations {
     uint public reservationIdCounter;
+
+    //Escrow escrowContract;
+
+    constructor() {
+        //constructor(address _escrowContract) {
+        //escrowContract = Escrow(_escrowContract);
+    }
 
     enum ReservationStatus {
         Created,
@@ -44,7 +52,7 @@ contract Reservations {
         uint checkInDate,
         uint checkOutDate,
         uint amount
-    ) public {
+    ) external payable {
         // Create a new reservation
         uint reservationId = reservationIdCounter;
         Reservation memory newReservation = Reservation(
@@ -59,6 +67,13 @@ contract Reservations {
         reservations.push(newReservation);
 
         reservationIdCounter++;
+
+        //escrowContract.createEscrow.value(amount)(
+        //    reservationId,
+        //    listingId,
+        //    msg.sender
+        //listingsContract.getListing(listingId).landlord
+        //);
     }
 
     function getReservation(

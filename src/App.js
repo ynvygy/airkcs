@@ -5,8 +5,6 @@ import Nav from './components/Nav';
 import NewListing from './components/NewListing';
 import Listings from './components/Listings';
 import Listing from './components/Listing';
-import LegacyListings from './components/LegacyListings';
-import LegacyListing from './components/LegacyListing';
 import MainPage from './components/MainPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Reservations from './components/Reservations';
@@ -45,9 +43,9 @@ function App() {
           <Routes>
             <Route exact path="/" element={<MainPage searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch}/>} />
             <Route path="/joins" element={<NewListing account={account}/>} />
-            <Route path="/legacylistings" element={<LegacyListings /> } />
+            {/*<Route path="/legacylistings" element={<LegacyListings /> } />
+            <Route path="/legacylisting" element={<LegacyListing />} />*/}
             <Route path="/listings" element={<Listings searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} /> } />
-            <Route path="/legacylisting" element={<LegacyListing />} />
             <Route path="/listing/:listingId" element={<Listing searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} />} />
             <Route path="/myreservations" element={<Reservations />} />
           </Routes>

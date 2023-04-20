@@ -54,7 +54,7 @@ const Nav = ({ account, setAccount }) => {
               <a href="#" style={{ color: "#fff", marginLeft: "20px" }}>Booqueen</a>
             </div>
             <div className="navbar-right">
-              <span style={{ paddingRight: "25px" }}>USD</span>
+              <span style={{ paddingRight: "25px" }}>ETH</span>
               <span style={{ paddingRight: "25px" }}>English</span>
               <span style={{ paddingRight: "25px" }}>Help</span>
               <a href="#" onClick={() => navigate('/joins')} style={{ color: "#fff" }}>List your property</a>
