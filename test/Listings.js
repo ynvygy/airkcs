@@ -13,7 +13,7 @@ describe("Listings", async () => {
   
     listings = await Listings.deploy()
     await listings.deployed();
-
+  
     image = "ipfs link"
     price = 10
     location = "London"

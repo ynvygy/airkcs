@@ -52,10 +52,17 @@ async function main() {
   //const reservationsContract = await Reservations.deploy(escrowContract.address);
   const reservationsContract = await Reservations.deploy();
   await reservationsContract.deployed()
+  console.log("Reservations contract deployed to:", reservationsContract.address);
+
+  const REHolder = await hre.ethers.getContractFactory("ReservationEscrowHolder");
+  const reHolderContract = await REHolder.deploy(escrowContract.address, reservationsContract.address);
+  await reHolderContract.deployed()
+  console.log( await reHolderContract.getContractAddresses());
 
   await writeDeploymentInfo("escrow", escrowContract)
   await writeDeploymentInfo("listings" ,listingsContract)
   await writeDeploymentInfo("reservations", reservationsContract)
+  await writeDeploymentInfo("reholder", reHolderContract)
 }
 
 async function writeDeploymentInfo(filename, contract) {

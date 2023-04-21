@@ -2,19 +2,18 @@ import { ethers } from 'ethers';
 import { useParams } from 'react-router-dom';
 import escrowContractData from '../data/escrow-contract.json';
 import reservationsContractData from '../data/reservations-contract.json';
+import reHolderContractData from '../data/reholder-contract.json';
 import Search from './Search';
 import './listing.css';
 
 const Listing = ({account, searchQuery, handleSearch, setSearchQuery}) => {
   const { listingId } = useParams();
-  const escrowAddress = escrowContractData.contract.address;
-  const escrowAbi = escrowContractData.contract.abi;
-  const reservationsAddress = reservationsContractData.contract.address;
-  const reservationsAbi = reservationsContractData.contract.abi;
-
   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const escrowContract = new ethers.Contract(escrowAddress, escrowAbi, provider);
-  const reservationsContract = new ethers.Contract(reservationsAddress, reservationsAbi, provider);
+
+  const reHolderAddress = reHolderContractData.contract.address;
+  const reHolderAbi = reHolderContractData.contract.abi;
+
+  const reHolderContract = new ethers.Contract(reHolderAddress, reHolderAbi, provider);
 
   const handleReserveClick = async () => {
     console.log(account);
@@ -24,8 +23,9 @@ const Listing = ({account, searchQuery, handleSearch, setSearchQuery}) => {
 
       const unixTimestampStart = Math.round(searchQuery.startDate.getTime() / 1000)
       const unixTimestampEnd = Math.round(searchQuery.endDate.getTime() / 1000)
+      console.log(reHolderContract)
+      const tx = await reHolderContract.connect(signer).createReservationAndEscrow(listingId, unixTimestampStart, unixTimestampEnd, reservationValue, { gasLimit: 1000000, value: reservationValue });
 
-      const tx = await reservationsContract.connect(signer).createReservation(listingId, unixTimestampStart, unixTimestampEnd, reservationValue, { gasLimit: 1000000 });
       console.log(tx);
     } catch (error) {
       console.error(error);
