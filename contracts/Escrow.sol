@@ -19,4 +19,8 @@ contract Escrow {
         escrowBalances[reservationId] = 0;
         recipient.transfer(amount);
     }
+
+    fallback() external payable {}
+
+    receive() external payable {}
 }

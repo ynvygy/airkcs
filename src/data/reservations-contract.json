@@ -1,10 +1,12 @@
 {
   "contract": {
-    "address": "0x7a2088a1bFc9d81c55368AE168C2C02570cB814F",
+    "address": "0x67d269191c92Caf3cD7723F116c85e6E9bf55933",
     "signerAddress": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
     "abi": [
       "constructor()",
-      "function createReservation(uint256 listingId, uint256 checkInDate, uint256 checkOutDate, uint256 amount) returns (uint256)",
+      "event ReservationCreated(uint256 indexed reservationId, uint256 listingId, address guest, uint8 status, uint256 amount, uint256 checkInDate, uint256 checkOutDate)",
+      "function cancelReservation(uint256 reservationId)",
+      "function createReservation(uint256 listingId, uint256 checkInDate, uint256 checkOutDate, uint256 amount, address guest) returns (uint256)",
       "function getAllReservations() view returns (tuple(uint256 id, uint256 listingId, address guest, uint8 status, uint256 amount, uint256 checkInDate, uint256 checkOutDate)[])",
       "function getReservation(uint256 reservationId) view returns (tuple(uint256 id, uint256 listingId, address guest, uint8 status, uint256 amount, uint256 checkInDate, uint256 checkOutDate))",
       "function reservationIdCounter() view returns (uint256)",

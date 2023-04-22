@@ -13,6 +13,16 @@ contract Reservations {
         Cancelled
     }
 
+    event ReservationCreated(
+        uint indexed reservationId,
+        uint listingId,
+        address guest,
+        ReservationStatus status,
+        uint amount,
+        uint checkInDate,
+        uint checkOutDate
+    );
+
     struct Reservation {
         uint id;
         uint listingId;
@@ -45,14 +55,15 @@ contract Reservations {
         uint listingId,
         uint checkInDate,
         uint checkOutDate,
-        uint amount
+        uint amount,
+        address guest
     ) external returns (uint) {
         // Create a new reservation
         uint reservationId = reservationIdCounter;
         Reservation memory newReservation = Reservation(
             reservationId,
             listingId,
-            msg.sender,
+            guest,
             ReservationStatus.Created,
             amount,
             checkInDate,
@@ -62,7 +73,17 @@ contract Reservations {
 
         reservationIdCounter++;
 
-        return reservationId;
+        emit ReservationCreated(
+            newReservation.id,
+            newReservation.listingId,
+            newReservation.guest,
+            newReservation.status,
+            newReservation.amount,
+            newReservation.checkInDate,
+            newReservation.checkOutDate
+        );
+
+        return newReservation.id;
     }
 
     function cancelReservation(uint reservationId) external {

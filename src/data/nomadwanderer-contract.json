@@ -1,17 +1,24 @@
 {
   "contract": {
-    "address": "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
+    "address": "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
     "signerAddress": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
     "abi": [
+      "constructor()",
       "event ListingCreated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
       "event ListingRemoved(uint256 indexed id, uint256 timestamp)",
       "event ListingUpdated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
+      "function cancelReservation(uint256 reservationId)",
       "function createListing(string name, uint256 stars, string image, uint256 price, string location, string description)",
+      "function createReservation(uint256 listingId, uint256 checkInDate, uint256 checkOutDate) payable",
+      "function getAllReservations() view returns (tuple(uint256 id, uint256 listingId, address guest, uint8 status, uint256 amount, uint256 checkInDate, uint256 checkOutDate)[])",
       "function getLandlord(uint256 _listingId) view returns (address)",
       "function getListing(uint256 _listingId) view returns (tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord))",
       "function getListings() view returns (uint256[], tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)[])",
+      "function getReservation(uint256 reservationId) view returns (tuple(uint256 id, uint256 listingId, address guest, uint8 status, uint256 amount, uint256 checkInDate, uint256 checkOutDate))",
       "function listings(uint256) view returns (string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)",
       "function removeListing(uint256 _listingId)",
+      "function reservationIdCounter() view returns (uint256)",
+      "function reservations(uint256) view returns (uint256 id, uint256 listingId, address guest, uint8 status, uint256 amount, uint256 checkInDate, uint256 checkOutDate)",
       "function updateListing(uint256 _listingId, string _image, uint256 _price, string _location, string _description)"
     ]
   }

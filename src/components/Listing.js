@@ -1,8 +1,6 @@
 import { ethers } from 'ethers';
 import { useParams } from 'react-router-dom';
-import escrowContractData from '../data/escrow-contract.json';
-import reservationsContractData from '../data/reservations-contract.json';
-import reHolderContractData from '../data/reholder-contract.json';
+import nomadWandererContractData from '../data/nomadwanderer-contract.json';
 import Search from './Search';
 import './listing.css';
 
@@ -10,10 +8,10 @@ const Listing = ({account, searchQuery, handleSearch, setSearchQuery}) => {
   const { listingId } = useParams();
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-  const reHolderAddress = reHolderContractData.contract.address;
-  const reHolderAbi = reHolderContractData.contract.abi;
+  const nomadWandererAddress = nomadWandererContractData.contract.address;
+  const nomadWandererAbi = nomadWandererContractData.contract.abi;
 
-  const reHolderContract = new ethers.Contract(reHolderAddress, reHolderAbi, provider);
+  const nomadWandererContract = new ethers.Contract(nomadWandererAddress, nomadWandererAbi, provider);
 
   const handleReserveClick = async () => {
     console.log(account);
@@ -23,8 +21,9 @@ const Listing = ({account, searchQuery, handleSearch, setSearchQuery}) => {
 
       const unixTimestampStart = Math.round(searchQuery.startDate.getTime() / 1000)
       const unixTimestampEnd = Math.round(searchQuery.endDate.getTime() / 1000)
-      console.log(reHolderContract)
-      const tx = await reHolderContract.connect(signer).createReservationAndEscrow(listingId, unixTimestampStart, unixTimestampEnd, reservationValue, { gasLimit: 1000000, value: reservationValue });
+      console.log(nomadWandererContract)
+      console.log("nomad", nomadWandererAbi)
+      const tx = await nomadWandererContract.connect(signer).createReservation(listingId, unixTimestampStart, unixTimestampEnd, { gasLimit: 1000000, value: reservationValue });
 
       console.log(tx);
     } catch (error) {

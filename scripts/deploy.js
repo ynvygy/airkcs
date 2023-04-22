@@ -57,12 +57,19 @@ async function main() {
   const REHolder = await hre.ethers.getContractFactory("ReservationEscrowHolder");
   const reHolderContract = await REHolder.deploy(escrowContract.address, reservationsContract.address);
   await reHolderContract.deployed()
+  console.log("RE Holder contract deployed to:", reHolderContract.address);
   console.log( await reHolderContract.getContractAddresses());
+
+  const NomadWanderer = await hre.ethers.getContractFactory("NomadWanderer");
+  const nomadWandererContract = await NomadWanderer.deploy();
+  await nomadWandererContract.deployed()
+  console.log("NomadWanderer contract deployed to:", nomadWandererContract.address);
 
   await writeDeploymentInfo("escrow", escrowContract)
   await writeDeploymentInfo("listings" ,listingsContract)
   await writeDeploymentInfo("reservations", reservationsContract)
   await writeDeploymentInfo("reholder", reHolderContract)
+  await writeDeploymentInfo("nomadwanderer", nomadWandererContract)
 }
 
 async function writeDeploymentInfo(filename, contract) {
