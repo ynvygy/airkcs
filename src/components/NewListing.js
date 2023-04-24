@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Buffer } from 'buffer';
 import { create } from 'ipfs-http-client'
 import { ethers } from 'ethers';
+import listingsContractData from '../data/listings-contract.json';
 
 const projectId = process.env.REACT_APP_INFURA_API_KEY
 const projectSecret = process.env.REACT_APP_INFURA_API_SECRET
@@ -18,23 +19,12 @@ const client = create({
   }
 })
 
-const ListingsABI = [
-  "event ListingCreated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
-  "event ListingRemoved(uint256 indexed id, uint256 timestamp)",
-  "event ListingUpdated(uint256 indexed id, uint256 price, string location, uint256 timestamp)",
-  "function createListing(string name, uint256 stars, string image, uint256 price, string location, string description)",
-  "function getLandlord(uint256 _listingId) view returns (address)",
-  "function getListing(uint256 _listingId) view returns (tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord))",
-  "function getListings() view returns (tuple(string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)[])",
-  "function listings(uint256) view returns (string name, uint256 stars, string image, uint256 price, string location, string description, address landlord)",
-  "function removeListing(uint256 _listingId)",
-  "function updateListing(uint256 _listingId, string _image, uint256 _price, string _location, string _description)"
-]
+const listingsAddress = listingsContractData.contract.address;
+const listingsAbi = listingsContractData.contract.abi;
 
-const contractAddress = '0xe7f1725e7734ce288f8367e1bb143e90bb3f0512';
 const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
 const signer = provider.getSigner();
-const listingsContract = new ethers.Contract(contractAddress, ListingsABI, signer);
+const listingsContract = new ethers.Contract(listingsAddress, listingsAbi, signer);
 
 async function onChange(e) {
   const file = e.target.files[0]
@@ -62,11 +52,6 @@ const NewListing = ({account}) => {
       return;
       }
       await listingsContract.createListing(name, stars, uri, price, location, description).then(() => alert("success")).catch((error) => alert(error.message))
-  };
-
-  const getListings = async () => {
-    const listings = await listingsContract.getListings();
-    console.log(listings);
   };
 
   const uploadToIPFS = async (event) => {
@@ -115,9 +100,6 @@ const NewListing = ({account}) => {
       </Form.Group>
       <Form.Group className="m-2 mt-4">
         <Button variant="success" onClick={createListing}>Create</Button>
-      </Form.Group>
-      <Form.Group className="m-2 mt-4">
-        <Button variant="success" onClick={getListings}>Get</Button>
       </Form.Group>
     </Form>
   )

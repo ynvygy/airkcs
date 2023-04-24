@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 import { useParams } from 'react-router-dom';
-import nomadWandererContractData from '../data/nomadwanderer-contract.json';
+import rchContractData from '../data/reholder-contract.json';
 import Search from './Search';
 import './listing.css';
 
@@ -8,10 +8,10 @@ const Listing = ({account, searchQuery, handleSearch, setSearchQuery}) => {
   const { listingId } = useParams();
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-  const nomadWandererAddress = nomadWandererContractData.contract.address;
-  const nomadWandererAbi = nomadWandererContractData.contract.abi;
+  const rchAddress = rchContractData.contract.address;
+  const rchAbi = rchContractData.contract.abi;
 
-  const nomadWandererContract = new ethers.Contract(nomadWandererAddress, nomadWandererAbi, provider);
+  const rchContract = new ethers.Contract(rchAddress, rchAbi, provider);
 
   const handleReserveClick = async () => {
     console.log(account);
@@ -21,9 +21,9 @@ const Listing = ({account, searchQuery, handleSearch, setSearchQuery}) => {
 
       const unixTimestampStart = Math.round(searchQuery.startDate.getTime() / 1000)
       const unixTimestampEnd = Math.round(searchQuery.endDate.getTime() / 1000)
-      console.log(nomadWandererContract)
-      console.log("nomad", nomadWandererAbi)
-      const tx = await nomadWandererContract.connect(signer).createReservation(listingId, unixTimestampStart, unixTimestampEnd, { gasLimit: 1000000, value: reservationValue });
+
+      console.log(rchContract)
+      const tx = await rchContract.connect(signer).createReservationAndEscrow(listingId, unixTimestampStart, unixTimestampEnd, { gasLimit: 1000000, value: reservationValue })
 
       console.log(tx);
     } catch (error) {
@@ -82,7 +82,7 @@ const Listing = ({account, searchQuery, handleSearch, setSearchQuery}) => {
               Description
             </div>
             <div className="col-md-6">
-              Ammenities  
+              Amenities  
             </div>
           </div>
         </div>

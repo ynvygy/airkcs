@@ -8,12 +8,6 @@ const hardhat = require("hardhat");
 const fs = require("fs/promises")
 
 async function main() {
-  const Escrow = await hre.ethers.getContractFactory("Escrow");
-  const escrowContract = await Escrow.deploy();
-  await escrowContract.deployed()
-
-  console.log("Escrow contract deployed to:", escrowContract.address);
-
   const Listings = await hre.ethers.getContractFactory("Listings");
   const listingsContract = await Listings.deploy();
   await listingsContract.deployed()
@@ -54,22 +48,22 @@ async function main() {
   await reservationsContract.deployed()
   console.log("Reservations contract deployed to:", reservationsContract.address);
 
+  const Escrow = await hre.ethers.getContractFactory("Escrow");
+  const escrowContract = await Escrow.deploy();
+  await escrowContract.deployed()
+
+  console.log("Escrow contract deployed to:", escrowContract.address);
+
   const REHolder = await hre.ethers.getContractFactory("ReservationEscrowHolder");
-  const reHolderContract = await REHolder.deploy(escrowContract.address, reservationsContract.address);
+  const reHolderContract = await REHolder.deploy(reservationsContract.address, escrowContract.address);
   await reHolderContract.deployed()
   console.log("RE Holder contract deployed to:", reHolderContract.address);
   console.log( await reHolderContract.getContractAddresses());
-
-  const NomadWanderer = await hre.ethers.getContractFactory("NomadWanderer");
-  const nomadWandererContract = await NomadWanderer.deploy();
-  await nomadWandererContract.deployed()
-  console.log("NomadWanderer contract deployed to:", nomadWandererContract.address);
 
   await writeDeploymentInfo("escrow", escrowContract)
   await writeDeploymentInfo("listings" ,listingsContract)
   await writeDeploymentInfo("reservations", reservationsContract)
   await writeDeploymentInfo("reholder", reHolderContract)
-  await writeDeploymentInfo("nomadwanderer", nomadWandererContract)
 }
 
 async function writeDeploymentInfo(filename, contract) {

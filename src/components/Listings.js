@@ -137,21 +137,10 @@ const Listings = ({searchQuery, setSearchQuery, handleSearch}) => {
                   <div className="col-md-7" style={{width: "50%", paddingLeft: "0px"}}>
                     <div className="hotel-text" style={{margin: "10px", textAlign: 'left'}}>
                     <a href={`/listing/${listingIds[index]}`} onClick={(e) => { e.preventDefault(); navigate(`/listing/${listingIds[index]}`); }}><h5 style={{color: "#0071c2", display: 'inline-block', paddingRight: "10px"}} onMouseOver={(e) => e.target.style.color = 'black'} onMouseOut={(e) => e.target.style.color = '#0071c2'}>{listing.name}</h5></a>
-                      { listings.stars}
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '15px', fill: "white" }}>
-                        <path d="M23.555 8.729a1.505 1.505 0 0 0-1.406-.98h-6.087a.5.5 0 0 1-.472-.334l-2.185-6.193a1.5 1.5 0 0 0-2.81 0l-.005.016-2.18 6.177a.5.5 0 0 1-.471.334H1.85A1.5 1.5 0 0 0 .887 10.4l5.184 4.3a.5.5 0 0 1 .155.543l-2.178 6.531a1.5 1.5 0 0 0 2.31 1.684l5.346-3.92a.5.5 0 0 1 .591 0l5.344 3.919a1.5 1.5 0 0 0 2.312-1.683l-2.178-6.535a.5.5 0 0 1 .155-.543l5.194-4.306a1.5 1.5 0 0 0 .433-1.661z" fill="#ffb700"/>
-                      </svg>
-                      <svg width="13" height="13" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '15px', fill: "white" }}>
-                        <path d="M112 8H16a8 8 0 0 0-8 8v96a8 8 0 0 0 8 8h96a8 8 0 0 0 8-8V16a8 8 0 0 0-8-8zM48 96H24V58h24zm56-25a8.7 8.7 0 0 1-2 6 8.9 8.9 0 0 1 1 4 6.9 6.9 0 0 1-5 7c-.5 4-4.8 8-9 8H56V58l10.3-23.3a5.4 5.4 0 0 1 10.1 2.7 10.3 10.3 0 0 1-.6 2.7L72 52h23c4.5 0 9 3.5 9 8a9.2 9.2 0 0 1-2 5.3 7.5 7.5 0 0 1 2 5.7z" fill="#ffb700"/>
-                      </svg>
                       <br/>
                       <p style={{color: "#0071c2", fontSize: "0.8em", marginRight: "10px", display: 'inline-block', fontWeight: "bold", textDecoration: "underline" }}>{listing.location}</p><p style={{color: "#0071c2", fontSize: "0.8em", display: 'inline-block', marginRight: "10px", fontWeight: "bold", textDecoration: "underline" }}>Show on map</p><p style={{fontSize: "0.8em", display: 'inline-block'}}>100 m from center</p>
-                      <div style={{borderLeft: "2px solid #e2e2e2", paddingLeft: "10px", marginTop: "10px", marginLeft: "10px"}}>
-                        <p style={{fontSize: "0.8em", fontWeight: "bold", margin: "0px"}}>Economy Double Room</p>
-                        <p style={{fontSize: "0.8em", margin: "0px"}}>1 full bed</p>
-                        <p style={{fontSize: "0.8em",color: "#108940", fontWeight: "bold", margin: "0px"}}>Free cancellation</p>
-                        <p style={{fontSize: "0.8em",color: "#108940", margin: "0px"}}>You can cancel later, so lock in this great price today!</p>
-                        <p style={{fontSize: "0.8em",color: "#d4111e", margin: "0px"}}>Only 1 room left at this price on our site</p>
+                      <div style={{paddingLeft: "10px", marginTop: "10px", marginLeft: "10px"}}>
+                        <p style={{fontSize: "1em", fontWeight: "bold", margin: "0px"}}>Room type</p>
                       </div>
                     </div>
                   </div>

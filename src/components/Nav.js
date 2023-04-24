@@ -51,7 +51,7 @@ const Nav = ({ account, setAccount }) => {
         <div className='col-md-7 offset-md-2 mx-auto'>
           <nav className="navbar">
             <div className="navbar-left">
-              <a href="#" style={{ color: "#fff", marginLeft: "20px" }}>Booqueen</a>
+              <a href="#" style={{ color: "#fff", marginLeft: "20px" }}>Nomad Wanderer</a>
             </div>
             <div className="navbar-right">
               <span style={{ paddingRight: "25px" }}>ETH</span>

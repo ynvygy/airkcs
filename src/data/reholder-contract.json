@@ -1,15 +1,15 @@
 {
   "contract": {
-    "address": "0xE6E340D132b5f46d1e472DebcD681B2aBc16e57E",
+    "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
     "signerAddress": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
     "abi": [
-      "constructor(address _reservationsContractAddress, address _escrowContractAddress)",
+      "constructor(address _reservations, address _escrow)",
       "event FallbackCalled(address reservationsContract, address escrowContract)",
       "function cancelReservationAndRefund(uint256 listingId)",
       "function createReservationAndEscrow(uint256 listingId, uint256 unixTimestampStart, uint256 unixTimestampEnd) payable",
-      "function escrowContractAddress() view returns (address)",
+      "function escrow() view returns (address)",
       "function getContractAddresses() view returns (address, address)",
-      "function reservationsContractAddress() view returns (address)"
+      "function reservations() view returns (address)"
     ]
   }
 }

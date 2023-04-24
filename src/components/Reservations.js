@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import reservationsContractData from '../data/reservations-contract.json';
-import escrowContractData from '../data/escrow-contract.json';
+import rchContractData from '../data/reholder-contract.json';
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
   const reservationsAddress = reservationsContractData.contract.address;
   const reservationsAbi = reservationsContractData.contract.abi;
 
-  const escrowAddress = escrowContractData.contract.address;
-  const escrowAbi = escrowContractData.contract.abi;
+  const rchAddress = rchContractData.contract.address;
+  const rchAbi = rchContractData.contract.abi;
 
   const statusMap = {
     0: "Created",
@@ -19,16 +19,12 @@ const Reservations = () => {
 
   async function cancelReservation(reservationId) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const reservationsContract = new ethers.Contract(reservationsAddress, reservationsAbi, provider);
+    const signer = provider.getSigner();
 
-    const tx = await reservationsContract.cancelReservation(reservationId);
+    const rchContract = new ethers.Contract(rchAddress, rchAbi, provider);
+
+    const tx = await rchContract.connect(signer).cancelReservationAndRefund(reservationId);
     await tx.wait();
-
-    // get the Escrow contract instance
-    const escrowContract = new ethers.Contract(escrowAddress, escrowAbi, provider);
-
-    const refundTx = await escrowContract.refund(reservationId);
-    await refundTx.wait();
   };
 
   useEffect(() => {
