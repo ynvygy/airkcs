@@ -90,6 +90,10 @@ contract Reservations {
         reservations[reservationId].status = ReservationStatus.Cancelled;
     }
 
+    function completeReservation(uint reservationId) external {
+        reservations[reservationId].status = ReservationStatus.Completed;
+    }
+
     function getReservation(
         uint reservationId
     ) public view returns (Reservation memory) {

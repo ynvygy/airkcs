@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './nav.css';
 
-const Nav = ({ account, setAccount }) => {
+const Nav = ({ account, setAccount, user, handleSwitchStatus }) => {
   const navigate = useNavigate();
   const connectHandler = async (event) => {
     try {
@@ -47,16 +47,19 @@ const Nav = ({ account, setAccount }) => {
 
   return (
     <>
-      <div className="booking-background">
+      <div className={user === 'guest' ? 'navbar-guest' : 'navbar-host'}>
         <div className='col-md-7 offset-md-2 mx-auto'>
           <nav className="navbar">
             <div className="navbar-left">
               <a href="#" style={{ color: "#fff", marginLeft: "20px" }}>Nomad Wanderer</a>
             </div>
             <div className="navbar-right">
-              <span style={{ paddingRight: "25px" }}>ETH</span>
-              <span style={{ paddingRight: "25px" }}>English</span>
-              <span style={{ paddingRight: "25px" }}>Help</span>
+              <span>ETH</span>
+              <span>English</span>
+              <span>Help</span>
+              <span onClick={handleSwitchStatus}>
+                {user === 'guest' ? 'Become a Host' : 'Become a Guest'}
+              </span>
               <a href="#" onClick={() => navigate('/joins')} style={{ color: "#fff" }}>List your property</a>
               { account ? (
                 <>

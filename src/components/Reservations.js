@@ -27,6 +27,16 @@ const Reservations = () => {
     await tx.wait();
   };
 
+  async function completeReservation(reservationId) {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    const rchContract = new ethers.Contract(rchAddress, rchAbi, provider);
+
+    const tx = await rchContract.connect(signer).completeReservationAndWithdraw(reservationId);
+    await tx.wait();
+  };
+
   useEffect(() => {
     async function fetchReservations() {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -62,6 +72,7 @@ const Reservations = () => {
                 <p className="card-text">Status: {statusMap[reservation.status]}</p>
               </div>
               <button onClick={() => cancelReservation(reservation.id)}>Cancel Reservation</button>
+              <button onClick={() => completeReservation(reservation.id)}>Complete Reservation</button>
             </div>
           </li>
         ))}

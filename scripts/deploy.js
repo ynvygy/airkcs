@@ -55,7 +55,7 @@ async function main() {
   console.log("Escrow contract deployed to:", escrowContract.address);
 
   const REHolder = await hre.ethers.getContractFactory("ReservationEscrowHolder");
-  const reHolderContract = await REHolder.deploy(reservationsContract.address, escrowContract.address);
+  const reHolderContract = await REHolder.deploy(reservationsContract.address, escrowContract.address, listingsContract.address);
   await reHolderContract.deployed()
   console.log("RE Holder contract deployed to:", reHolderContract.address);
   console.log( await reHolderContract.getContractAddresses());

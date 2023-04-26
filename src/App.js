@@ -12,6 +12,7 @@ import Reservations from './components/Reservations';
 function App() {
   const [provider, setProvider] = useState(null)
   const [account, setAccount] = useState(null)
+  const [user, setUser] = useState('guest');
   const [searchQuery, setSearchQuery] = useState({
     location: '',
     startDate: null,
@@ -19,11 +20,14 @@ function App() {
     guests: 2,
   });
   
-
   const handleSearch = (event) => {
     const { name, value } = event.target;
     setSearchQuery({ ...searchQuery, [name]: value });
   };
+
+  function handleSwitchStatus() {
+    setUser(user === 'guest' ? 'host' : 'guest');
+  }
 
   const loadBlockchainData = async () => {
     // connect to blockchain
@@ -39,7 +43,7 @@ function App() {
     <div className="App">
       <div>
         <BrowserRouter>
-          <Nav account={account} setAccount={setAccount} />
+          <Nav account={account} setAccount={setAccount} user={user} handleSwitchStatus={handleSwitchStatus} />
           <Routes>
             <Route exact path="/" element={<MainPage searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch}/>} />
             <Route path="/joins" element={<NewListing account={account}/>} />
