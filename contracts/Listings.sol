@@ -1,8 +1,48 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
+import "./Reservations.sol";
+
+interface IReservations {
+    struct Reservation {
+        uint id;
+        uint listingId;
+        address guest;
+        ReservationStatus status;
+        uint amount;
+        uint checkInDate;
+        uint checkOutDate;
+    }
+
+    enum ReservationStatus {
+        Created,
+        Completed,
+        Cancelled
+    }
+
+    function createReservation(
+        uint listingId,
+        uint checkInDate,
+        uint checkOutDate,
+        uint amount,
+        address guest
+    ) external returns (uint);
+
+    function cancelReservation(uint reservationId) external;
+
+    function completeReservation(uint reservationId) external;
+
+    function getReservation(
+        uint reservationId
+    ) external returns (Reservation memory);
+}
 
 contract Listings {
     uint nextListingId;
+    IReservations public reservations;
+
+    constructor(IReservations _reservations) {
+        reservations = _reservations;
+    }
 
     struct Listing {
         string name;
@@ -101,6 +141,44 @@ contract Listings {
         }
 
         return (ids, result);
+    }
+
+    function getAvailableListings(
+        uint checkInDate,
+        uint checkOutDate
+    ) public view returns (Listing[] memory, uint) {
+        Listing[] memory availableListings = new Listing[](0);
+        uint numAvailableListings = 0;
+
+        for (uint i = 0; i < listings.length; i++) {
+            uint listingId = listings[i].id;
+            bool isListingAvailable = true;
+            IReservations.Reservation[] memory reservations = IReservations
+                .getReservationsForListing(listingId);
+
+            for (uint j = 0; j < reservations.length; j++) {
+                IReservations.Reservation memory _reservation = reservations[j];
+                if (_reservation.status != ReservationStatus.Canceled) {
+                    if (
+                        (checkInDate >= _reservation.checkInDate &&
+                            checkInDate < _reservation.checkOutDate) ||
+                        (checkOutDate > _reservation.checkInDate &&
+                            checkOutDate <= _reservation.checkOutDate) ||
+                        (checkInDate <= _reservation.checkInDate &&
+                            checkOutDate >= _reservation.checkOutDate)
+                    ) {
+                        isListingAvailable = false;
+                        break;
+                    }
+                }
+            }
+
+            if (isListingAvailable) {
+                availableListings[numAvailableListings] = listings[i];
+                numAvailableListings++;
+            }
+        }
+        return (availableListings, numAvailableListings);
     }
 
     function getLandlord(uint _listingId) public view returns (address) {

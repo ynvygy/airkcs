@@ -13,6 +13,7 @@ function App() {
   const [provider, setProvider] = useState(null)
   const [account, setAccount] = useState(null)
   const [user, setUser] = useState('guest');
+  const [dateDifference, setDateDifference] = useState(0);
   const [searchQuery, setSearchQuery] = useState({
     location: '',
     startDate: null,
@@ -45,12 +46,12 @@ function App() {
         <BrowserRouter>
           <Nav account={account} setAccount={setAccount} user={user} handleSwitchStatus={handleSwitchStatus} />
           <Routes>
-            <Route exact path="/" element={<MainPage searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch}/>} />
+            <Route exact path="/" element={<MainPage searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} dateDifference={dateDifference} setDateDifference={setDateDifference}/>} />
             <Route path="/joins" element={<NewListing account={account}/>} />
             {/*<Route path="/legacylistings" element={<LegacyListings /> } />
             <Route path="/legacylisting" element={<LegacyListing />} />*/}
-            <Route path="/listings" element={<Listings searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} /> } />
-            <Route path="/listing/:listingId" element={<Listing searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} />} />
+            <Route path="/listings" element={<Listings searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} dateDifference={dateDifference} setDateDifference={setDateDifference}/> } />
+            <Route path="/listing/:listingId" element={<Listing searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} dateDifference={dateDifference} setDateDifference={setDateDifference}/>} />
             <Route path="/myreservations" element={<Reservations />} />
           </Routes>
         </BrowserRouter>

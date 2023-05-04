@@ -8,8 +8,14 @@ const hardhat = require("hardhat");
 const fs = require("fs/promises")
 
 async function main() {
+  const Reservations = await hre.ethers.getContractFactory("Reservations");
+  //const reservationsContract = await Reservations.deploy(escrowContract.address);
+  const reservationsContract = await Reservations.deploy();
+  await reservationsContract.deployed()
+  console.log("Reservations contract deployed to:", reservationsContract.address);
+
   const Listings = await hre.ethers.getContractFactory("Listings");
-  const listingsContract = await Listings.deploy();
+  const listingsContract = await Listings.deploy(reservationsContract.address);
   await listingsContract.deployed()
 
   console.log("Listings contract deployed to:", listingsContract.address);
@@ -41,12 +47,6 @@ async function main() {
     "This luxurious villa offers breathtaking views of the ocean."
   );
   console.log("Seed listings created.");
-
-  const Reservations = await hre.ethers.getContractFactory("Reservations");
-  //const reservationsContract = await Reservations.deploy(escrowContract.address);
-  const reservationsContract = await Reservations.deploy();
-  await reservationsContract.deployed()
-  console.log("Reservations contract deployed to:", reservationsContract.address);
 
   const Escrow = await hre.ethers.getContractFactory("Escrow");
   const escrowContract = await Escrow.deploy();

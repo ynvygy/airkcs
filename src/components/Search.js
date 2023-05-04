@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import './search.css';
 import { ethers } from 'ethers';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const Search = ({searchQuery, setSearchQuery, handleSearch}) => {
+const Search = ({searchQuery, setSearchQuery, handleSearch, dateDifference, setDateDifference}) => {
   const navigate = useNavigate();
   const minDate = new Date();
 
@@ -43,6 +43,27 @@ const Search = ({searchQuery, setSearchQuery, handleSearch}) => {
     setListings(listings)
   };
 
+  const handleStartDateChange = (date) => {
+    setSearchQuery({...searchQuery, startDate: date});
+  };
+
+  const handleEndDateChange = (date) => {
+    setSearchQuery({...searchQuery, endDate: date})
+    if (searchQuery.startDate && searchQuery.endDate) {
+      const differenceInMs = searchQuery.endDate.getTime() - searchQuery.startDate.getTime();
+      const differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+      setDateDifference(differenceInDays)
+    }
+  };
+
+  useEffect(() => {
+    if (searchQuery.startDate && searchQuery.endDate) {
+      const differenceInMs = searchQuery.endDate.getTime() - searchQuery.startDate.getTime();
+      const differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+      setDateDifference(differenceInDays);
+    }
+  }, [searchQuery.startDate, searchQuery.endDate]);
+
   return (
     <>
       <div className="search-background">
@@ -61,7 +82,7 @@ const Search = ({searchQuery, setSearchQuery, handleSearch}) => {
               <div style={{width: '49%', padding: '0px', borderRadius: '3px', marginRight: '5px', display: 'flex', whiteSpace: 'nowrap', alignItems: 'center', backgroundColor: 'white'}}>
                 <DatePicker
                   selected={searchQuery.startDate}
-                  onChange={date => setSearchQuery({...searchQuery, startDate: date})}
+                  onChange={(date) => handleStartDateChange(date)}
                   selectsStart
                   startDate={searchQuery.startDate}
                   endDate={searchQuery.endDate}
@@ -71,7 +92,7 @@ const Search = ({searchQuery, setSearchQuery, handleSearch}) => {
                 />
                 <DatePicker
                   selected={searchQuery.endDate}
-                  onChange={date => setSearchQuery({...searchQuery, endDate: date})}
+                  onChange={(date) => handleEndDateChange(date)}
                   selectsEnd
                   startDate={searchQuery.startDate}
                   endDate={searchQuery.endDate}

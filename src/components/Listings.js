@@ -26,7 +26,7 @@ const provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
 const signer = provider.getSigner();
 const listingsContract = new ethers.Contract(contractAddress, listingsAbi, signer);
 
-const Listings = ({searchQuery, setSearchQuery, handleSearch}) => {
+const Listings = ({searchQuery, setSearchQuery, handleSearch, dateDifference, setDateDifference}) => {
   const navigate = useNavigate();
 
   const [listings, setListings] = useState([]);
@@ -48,7 +48,7 @@ const Listings = ({searchQuery, setSearchQuery, handleSearch}) => {
 
   return (
     <div>
-      <Search searchQuery={searchQuery} handleSearch={handleSearch} setSearchQuery={setSearchQuery}/>
+      <Search searchQuery={searchQuery} handleSearch={handleSearch} setSearchQuery={setSearchQuery} dateDifference={dateDifference} setDateDifference={setDateDifference}/>
       <div className='col-md-8 offset-md-2 mx-auto' style={{ marginTop: '10px', fontSize: '0.8em', textAlign: 'left', width: "92%", marginLeft: "83px" }}>
         <span style={{ color: '#0071c2' }}>United States of America</span>
         <span> &gt; </span>

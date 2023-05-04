@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
-import "./Listings.sol";
 
 contract Reservations {
     uint public reservationIdCounter;
@@ -106,6 +105,21 @@ contract Reservations {
 
     function getAllReservations() public view returns (Reservation[] memory) {
         return reservations;
+    }
+
+    function getReservationsForListing(
+        uint _listingId
+    ) public view returns (Reservation[] memory) {
+        Reservation[] memory listingReservations = new Reservation[](0);
+
+        for (uint i = 0; i < reservations.length; i++) {
+            Reservation memory reservation = reservations[i];
+            if (reservation.listingId == _listingId) {
+                listingReservations.push(reservation);
+            }
+        }
+
+        return listingReservations;
     }
 
     function isListingAvailable(

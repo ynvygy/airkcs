@@ -5,40 +5,6 @@ import "./Listings.sol";
 import "./Reservations.sol";
 import "hardhat/console.sol";
 
-interface IReservations {
-    struct Reservation {
-        uint id;
-        uint listingId;
-        address guest;
-        ReservationStatus status;
-        uint amount;
-        uint checkInDate;
-        uint checkOutDate;
-    }
-
-    enum ReservationStatus {
-        Created,
-        Completed,
-        Cancelled
-    }
-
-    function createReservation(
-        uint listingId,
-        uint checkInDate,
-        uint checkOutDate,
-        uint amount,
-        address guest
-    ) external returns (uint);
-
-    function cancelReservation(uint reservationId) external;
-
-    function completeReservation(uint reservationId) external;
-
-    function getReservation(
-        uint reservationId
-    ) external returns (Reservation memory);
-}
-
 interface IEscrow {
     function depositEscrow(uint reservationId) external payable;
 

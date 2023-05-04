@@ -1,6 +1,6 @@
 {
   "contract": {
-    "address": "0x1757a98c1333B9dc8D408b194B2279b5AFDF70Cc",
+    "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
     "signerAddress": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
     "abi": [
       "constructor()",

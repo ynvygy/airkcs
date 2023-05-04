@@ -1,10 +1,13 @@
 import { ethers } from 'ethers';
 import { useParams } from 'react-router-dom';
 import rchContractData from '../data/reholder-contract.json';
+import listingsContractData from '../data/listings-contract.json';
 import Search from './Search';
 import './listing.css';
+import { useState, useEffect } from 'react';
 
-const Listing = ({account, searchQuery, handleSearch, setSearchQuery}) => {
+const Listing = ({account, searchQuery, handleSearch, setSearchQuery, dateDifference, setDateDifference}) => {
+  const [listing, setListing] = useState({});
   const { listingId } = useParams();
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -13,11 +16,25 @@ const Listing = ({account, searchQuery, handleSearch, setSearchQuery}) => {
 
   const rchContract = new ethers.Contract(rchAddress, rchAbi, provider);
 
+  const listingsAbi = listingsContractData.contract.abi;
+  const contractAddress = listingsContractData.contract.address;
+  const listingsContract = new ethers.Contract(contractAddress, listingsAbi, provider);
+
+  useEffect(() => {
+    const getListing = async () => {
+      const listing = await listingsContract.getListing(listingId);
+      setListing(listing);
+    };
+  
+    getListing();
+  }, []);
+
   const handleReserveClick = async () => {
     console.log(account);
     try {
       const signer = provider.getSigner();
-      const reservationValue = ethers.utils.parseEther("5");
+      const etherValue = dateDifference * (listing.price && ethers.utils.formatEther(ethers.BigNumber.from(listing.price)))
+      const reservationValue = ethers.utils.parseEther(etherValue.toString());
 
       const unixTimestampStart = Math.round(searchQuery.startDate.getTime() / 1000)
       const unixTimestampEnd = Math.round(searchQuery.endDate.getTime() / 1000)
@@ -49,7 +66,7 @@ const Listing = ({account, searchQuery, handleSearch, setSearchQuery}) => {
 
   return (
     <>
-      <Search searchQuery={searchQuery} handleSearch={handleSearch} setSearchQuery={setSearchQuery}/>
+      <Search searchQuery={searchQuery} handleSearch={handleSearch} setSearchQuery={setSearchQuery} dateDifference={dateDifference} setDateDifference={setDateDifference}/>
       <div className='col-md-8 offset-md-2 mx-auto'>
         <div className="title">
           <div className="row">
@@ -90,7 +107,7 @@ const Listing = ({account, searchQuery, handleSearch, setSearchQuery}) => {
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">The final price is</h5>
-            <h4>price</h4>
+            <h4>{dateDifference * (listing.price && ethers.utils.formatEther(ethers.BigNumber.from(listing.price)))}</h4>
             <button id="reserve-button" onClick={handleReserveClick}>
               <p id="reserve-text">I'll reserve</p>
             </button>
